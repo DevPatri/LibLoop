@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
+
 /* L I B R O S */
 use App\Http\Controllers\LibroController;
 
