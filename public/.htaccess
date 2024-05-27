@@ -1,8 +1,5 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-
+    Options +FollowSymLinks
     RewriteEngine On
 
     # Handle Authorization Header
@@ -18,4 +15,7 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # Ensure the public/storage directory is accessible
+    RewriteRule ^storage/(.*)$ /storage/$1 [L]
 </IfModule>

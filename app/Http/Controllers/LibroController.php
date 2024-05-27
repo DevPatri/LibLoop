@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Libro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class LibroController extends Controller {
 
@@ -15,25 +16,90 @@ class LibroController extends Controller {
         return view('libros.create');
     }
 
-    public function store(Request $request) {
+    // public function store(Request $request) {
+    //     $validated = $request->validate([
+    //         'titulo' => 'required',
+    //         'autor' => 'required',
+    //         'genero' => 'required',
+    //         'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    //         'usuario_id' => 'required|exists:usuarios,id'
+    //     ]);
+
+    //     $libro = new Libro($validated);
+
+    //     if ($request->hasFile('foto')) {
+    //         $path = $request->file('foto')->store('public/fotos');
+    //         $libro->foto_url = $path;
+    //     }
+        
+    //     $libro->save();
+
+    //     return redirect()->route('libros.index')->with('success', 'Libro creado con éxito.');
+    // }
+
+
+
+
+    // public function store(Request $request) {
+
+    //     // Validar los datos del formulario
+    //     $request->validate([
+    //         'titulo' => 'required|string|max:255',
+    //         'autor' => 'required|string|max:255',
+    //         'genero' => 'required|string|max:100',
+    //         'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    //         'usuario_id' => 'nullable|integer|exists:usuarios,usuario_id', // Validar usuario_id
+    //     ]);
+
+    //     // Guardar la imagen
+    //     $path = $request->file('foto')->store('libros', 'public');
+
+    //     // Crear un nuevo libro
+    //     $libro = new Libro();
+    //     $libro->titulo = $request->input('titulo');
+    //     $libro->autor = $request->input('autor');
+    //     $libro->genero = $request->input('genero');
+    //     $libro->foto_url = $path;
+    //     $libro->estado = $request->input('estado', 'disponible'); // Hemos puesto el estado del libro por defecto en disponible cuando se crea
+    //     $libro->usuario_id = $request->input('usuario_id'); // Asignar usuario_id manualmente
+
+    //     $libro->save();
+
+    //     return redirect()->route('libros.index')->with('success', 'Libro subido exitosamente.');
+    // }
+
+    public function store(Request $request)
+    {
+        // Validar los datos del formulario
         $validated = $request->validate([
-            'titulo' => 'required',
-            'autor' => 'required',
-            'genero' => 'required',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'usuario_id' => 'required|exists:usuarios,id'
+            'titulo' => 'required|string|max:255',
+            'autor' => 'required|string|max:255',
+            'genero' => 'required|string|max:100',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'usuario_id' => 'nullable|integer|exists:usuarios,usuario_id', // Comentar esta línea
         ]);
 
-        $libro = new Libro($validated);
+        Log::info('Validación pasada', $validated);
 
-        if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('public/fotos');
-            $libro->foto_url = $path;
-        }
-        
+        // Guardar la imagen
+        $path = $request->file('foto')->store('libros', 'public');
+        Log::info('Imagen guardada en', ['path' => $path]);
+
+        // Crear un nuevo libro
+        $libro = new Libro();
+        $libro->titulo = $request->input('titulo');
+        $libro->autor = $request->input('autor');
+        $libro->genero = $request->input('genero');
+        $libro->foto_url = $path;
+        $libro->estado = 'disponible';
+        $libro->usuario_id = 1; // Asignamos un valor temporal para usuario_id 
+
+        Log::info('Libro creado', $libro->toArray());
+
         $libro->save();
+        Log::info('Libro guardado en la base de datos');
 
-        return redirect()->route('libros.index')->with('success', 'Libro creado con éxito.');
+        return redirect()->route('libros.index')->with('success', 'Libro subido exitosamente.');
     }
 
     public function show(Libro $libro) {

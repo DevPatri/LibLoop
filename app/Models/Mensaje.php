@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mensaje extends Model {
     use HasFactory;
 
-    protected $table = 'Mensajes';
+    protected $table = 'mensajes';
     protected $primaryKey = 'mensaje_id';
     protected $fillable = ['remitente_id', 'destinatario_id', 'contenido', 'fecha_hora'];
 

@@ -1,5 +1,6 @@
 <?php
 
+/* A U T E N T I F I C A C I Ó N */
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Card;
@@ -25,3 +26,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+/* L I B R O S */
+use App\Http\Controllers\LibroController;
+
+Route::get('/libros/create', [LibroController::class, 'create'])->name('libros.create');
+Route::post('/libros', [LibroController::class, 'store'])->name('libros.store');
+Route::get('/libros', [LibroController::class, 'index'])->name('libros.index');
