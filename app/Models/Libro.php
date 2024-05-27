@@ -9,7 +9,9 @@ class Libro extends Model {
     
     use HasFactory;
 
-    protected $table = 'Libros';
+    public $timestamps = false;
+
+    protected $table = 'libros';
     protected $primaryKey = 'libro_id';
     protected $fillable = ['titulo', 'autor', 'genero', 'foto_url', 'estado', 'usuario_id'];
 
@@ -23,7 +25,18 @@ class Libro extends Model {
     }
 
     public function favoritosDeUsuarios() {
-        return $this->belongsToMany(Usuario::class, 'favoritos', 'libro_id', 'usuario_id');
+        return $this->belongsToMany(Usuario::class, 'favoritos', 'libro_id', 'usuario_id');  
+    }
+
+    // Establecer valor predeterminado para 'estado'
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->estado)) {
+                $model->estado = 'disponible';
+            }
+        });
     }
 
 }

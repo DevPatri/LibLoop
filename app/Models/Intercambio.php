@@ -9,7 +9,7 @@ class Intercambio extends Model {
     
     use HasFactory;
 
-    protected $table = 'Intercambios';
+    protected $table = 'intercambios';
     protected $primaryKey = 'intercambio_id';
     protected $fillable = ['libro_id', 'solicitante_id', 'propietario_id', 'fecha_solicitud', 'estado'];
 
