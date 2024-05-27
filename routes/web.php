@@ -2,8 +2,41 @@
 
 /* A U T E N T I F I C A C I Ó N */
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Card;
+
+
+/* 1. LOGIN USUARIO */ 
+// Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+//     ->middleware('guest')
+//     ->name('login');
+
+/* 2. REGISTRAR USUARIO */ 
+// Route::post('/register', [UsuarioController::class, 'register'])->name('register');
+
+
+// // Rutas de registro
+// Route::get('/register', [UsuarioController::class, 'create'])->middleware('guest')->name('register');
+// Route::post('/register', [UsuarioController::class, 'store'])->middleware('guest');
+
+// // Rutas de inicio de sesión
+// Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+//     ->middleware('guest')
+//     ->name('login');
+
+
+// Ruta de inicio de sesión
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    ->middleware('guest')
+    ->name('login');
+
+// Ruta personalizada de registro de usuario
+Route::get('/register', [UsuarioController::class, 'create'])->middleware('guest')->name('register');
+Route::post('/register', [UsuarioController::class, 'store'])->middleware('guest')->name('register');
+
+
 
 Route::get('/', function () {
     $cardBooks = new Card();

@@ -68,8 +68,7 @@ class LibroController extends Controller {
     //     return redirect()->route('libros.index')->with('success', 'Libro subido exitosamente.');
     // }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         // Validar los datos del formulario
         $validated = $request->validate([
             'titulo' => 'required|string|max:255',

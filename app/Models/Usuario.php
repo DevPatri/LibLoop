@@ -5,15 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
 use App\Models\Libro;
 use App\Models\Intercambio;
 use App\Models\Mensaje;
 use App\Models\Notificacion;
 use App\Models\Genero;
 
-class Usuario extends Model {
+class Usuario extends Authenticatable {
 
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $table = 'usuarios';
     protected $primaryKey = 'usuario_id';
@@ -21,6 +24,15 @@ class Usuario extends Model {
 
     // Indicamos a Eloquent que no maneje automáticamente las columnas created_at y updated_at (estaban creadas por defecto)
     public $timestamps = false;
+
+
+    protected $hidden = ['contrasena', 'remember_token'];
+
+    // Método para indicar el campo de contraseña
+    public function getAuthPassword() {
+        return $this->contrasena;
+    }
+    
 
      // Relación de libros publicados por el usuario
      public function libros() {
