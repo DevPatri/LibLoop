@@ -4,6 +4,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Card;
+use App\Http\Controllers\LibroController;
 
 Route::get('/', function () {
     $cardBooks = new Card();
@@ -14,6 +15,7 @@ Route::get('/', function () {
 Route::get('/explore', function () {
     return view('explorer');
 })->name('explore');
+Route::get('/explore/book/{libro_id}', [LibroController::class, 'show'])->name('explore.book');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,8 +30,6 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 /* L I B R O S */
-use App\Http\Controllers\LibroController;
-
-Route::get('/libros/create', [LibroController::class, 'create'])->name('libros.create');
-Route::post('/libros', [LibroController::class, 'store'])->name('libros.store');
-Route::get('/libros', [LibroController::class, 'index'])->name('libros.index');
+Route::get('/books/create', [LibroController::class, 'create'])->name('libros.create');
+Route::post('/books', [LibroController::class, 'store'])->name('libros.store');
+Route::get('/books', [LibroController::class, 'index'])->name('libros.index');
