@@ -6,9 +6,19 @@
         </div>
         <div class="links">
             <a href="{{ route('index') }}">Inicio</a>
-            <a href="#">Intercambio</a>
             <a href="#">Ayuda</a>
             <a href="#">Contacto</a>
+            @if (Auth::check())
+                <a href="{{route('dashboard')}}">{{ Auth::user()->nombre }}</a>
+            @else
+                <a href="{{ route('login') }}">Iniciar sesión</a>
+            @endif
+{{--  !Falta por implementar el botón de log out  --}}
+            {{--  @if(Auth::check())
+                <form action="{{route('logout')}}" method="POST">
+                    <button type="submit">Log out</button>
+                </form>
+            @endif  --}}
         </div>
     </nav>
     <hr>
