@@ -1,4 +1,97 @@
-<x-guest-layout>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Navbar personalizado -->
+        <div class="navbar">
+            <div class="marca">LibLoop</div>
+            <div class="links">
+                <a href="{{ url('/') }}">Inicio</a>
+                <a href="{{ url('/explore') }}">Explora</a>
+            </div>
+        </div>
+
+        <!-- Fondo difuminado -->
+        <div class="login-background"></div>
+
+        <!-- Contenedor centrado -->
+        <div class="centered-container">
+
+            <!-- Contenedor del formulario -->
+            <div class="form-container">
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+
+                    <div class="form-header">
+                        <h2 class="login">REGISTRARSE</h2>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="input-group">
+                        <label for="nombre">Nombre</label>
+                        <input id="nombre" type="text" name="nombre" required autofocus>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" name="email" required>
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div class="input-group">
+                        <label for="contrasena">Contraseña</label>
+                        <input id="contrasena" type="password" name="contrasena" required>
+                    </div>
+
+                    <!-- Confirmar Contraseña -->
+                    <div class="input-group">
+                        <label for="password_confirmation">Confirmar Contraseña</label>
+                        <input id="password_confirmation" type="password" name="password_confirmation" required>
+                    </div>
+
+                    <!-- Ubicación -->
+                    <div class="input-group">
+                        <label for="ubicacion">Ubicación</label>
+                        <input id="ubicacion" type="text" name="ubicacion" required>
+                    </div>
+
+                    <button type="submit" class="btn-login">Registrar</button>
+
+                    <div class="forgot-password">
+                        <a href="{{ route('login') }}">¿Ya estás registrado?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+
+                            <!-- VISTA POR DEFECTO BREEZE -->
+
+{{-- <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -46,4 +139,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
