@@ -6,12 +6,14 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;  // Importar la clase Hash de Illuminate para el hashing de contraseñas
 use Illuminate\Support\Facades\Auth; // Importar la clase Auth de Illuminate para la autenticación
+use Illuminate\Support\Facades\Route;
 
 class UsuarioController extends Controller {
 
     // Muestra el formulario de registro
     public function create() {
-        return view('usuarios.create');
+        return view('auth.register');         // POR DEFECTO BREEZE
+        //return view('usuarios.create');    // FUTURA VISTA
     }
 
     // Guarda un nuevo usuario en la BD
@@ -36,7 +38,8 @@ class UsuarioController extends Controller {
         // Loguear al usuario inmediatamente después del registro  
         Auth::login($usuario);
 
-        return redirect()->route('home')->with('success', 'Usuario registrado y logueado con éxito.');   //? MODIFICAR CON LA RUTA EXACTA
+        return redirect()->route('dashboard')->with('success', 'Usuario registrado y logueado con éxito.');
+
     }
 
     // Inicio de sesión
