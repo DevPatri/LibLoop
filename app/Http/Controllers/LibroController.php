@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class LibroController extends Controller {
 
+    private $_PATH_FOTOS = 'storage/libros/';
     public function index() {
         $libros = Libro::all();
         return view('libros.index', compact('libros'));
@@ -31,7 +32,7 @@ class LibroController extends Controller {
     //         $path = $request->file('foto')->store('public/fotos');
     //         $libro->foto_url = $path;
     //     }
-        
+
     //     $libro->save();
 
     //     return redirect()->route('libros.index')->with('success', 'Libro creado con éxito.');
@@ -83,6 +84,7 @@ class LibroController extends Controller {
 
         // Guardar la imagen
         $path = $request->file('foto')->store('libros', 'public');
+        $path_final = $this->_PATH_FOTOS . "" . $path;
         Log::info('Imagen guardada en', ['path' => $path]);
 
         // Crear un nuevo libro
@@ -90,9 +92,9 @@ class LibroController extends Controller {
         $libro->titulo = $request->input('titulo');
         $libro->autor = $request->input('autor');
         $libro->genero = $request->input('genero');
-        $libro->foto_url = $path;
+        $libro->foto_url = $path_final;
         $libro->estado = 'disponible';
-        $libro->usuario_id = 1; // Asignamos un valor temporal para usuario_id 
+        $libro->usuario_id = 1; //! Asignamos un valor temporal para usuario_id
 
         Log::info('Libro creado', $libro->toArray());
 
@@ -102,8 +104,10 @@ class LibroController extends Controller {
         return redirect()->route('libros.index')->with('success', 'Libro subido exitosamente.');
     }
 
-    public function show(Libro $libro) {
-        return view('libros.show', compact('libro'));
+    //* Busqueda para mostrar un libro y mandarlo a la view 'book'
+    public function show($id) {
+        $libro = Libro::find($id);
+        return view('book', compact('libro'));
     }
 
     public function edit(Libro $libro) {
@@ -126,6 +130,6 @@ class LibroController extends Controller {
         $libro->delete();
         return redirect()->route('libros.index')->with('success', 'Libro eliminado con éxito.');
     }
-    
+
 
 }
