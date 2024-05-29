@@ -7,10 +7,8 @@ use App\Models\Libro;
 
 class Sidebar extends Component
 {
-    public function filterByGender($gender)
-    {
-        $this->emit('filterByGender', $gender);
-    }
+    public $gender;
+
 
     public function render()
     {
@@ -19,8 +17,16 @@ class Sidebar extends Component
         return view(
             'livewire.sidebar',
             [
-                'generos' => $generos
+                'generos' => $generos,
             ]
         );
     }
+
+    //* Filtrar con select el género a mostrar.
+    public function filterByGender($gender)
+    {
+        $this->gender = $gender;
+        $this->dispatch('filter', $this->gender);
+    }
+    //* end filter
 }

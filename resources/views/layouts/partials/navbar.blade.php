@@ -1,7 +1,7 @@
 <header>
     <nav class="container">
         <div class="first">
-            <img class="logo" src="./assets/img/Logo_without_back.png" alt="logo">
+            <img class="logo" src="/assets/img/logo_without_back.png" alt="logo">
             <h1>LibLoop</h1>
         </div>
         <div class="links">

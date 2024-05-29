@@ -8,8 +8,8 @@
         <div class="banner">
             <p class="text">Un libro cerrado no abre mentes, intercambia y descubre.</p>
             <div class="banner-bt">
-                <button>Reg&iacute;strate</button>
-                <button>Inicia sesi&oacute;n</button>
+                <a class="btn-primary" href="{{ route('register') }}">Reg&iacute;strate</a>
+                <a class="btn-primary" href="{{ route('login') }}">Inicia sesi&oacute;n</a>
             </div>
         </div>
         <section>
@@ -19,12 +19,13 @@
                 <a>G&eacute;neros</a>
                 <a href="{{ route('explore') }}">Explora</a>
             </div>
-            {{--  Aquí meteríamos un foreach para mostrar 3 de los libros  --}}
+            {{--  mostramos 3 libros para la portada  --}}
             @foreach ($books as $book)
                 @livewire('card', [
                     'foto_url' => $book->foto_url,
                     'titulo' => $book->titulo,
                     'autor' => $book->autor,
+                    'libro_id' => $book->libro_id
                 ])
             @endforeach
         </section>
@@ -62,7 +63,7 @@
                 justify-content: space-evenly;
                 width: 70%;
 
-                a, button {
+                a, .btn-primary {
                     width: fit-content;
                     padding: 5px 10px;
                     border: none;
