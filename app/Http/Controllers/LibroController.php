@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class LibroController extends Controller {
 
+    private $_PATH_FOTOS = 'storage/libros/';
     public function index() {
         $libros = Libro::all();
         return view('libros.index', compact('libros'));
@@ -83,6 +84,7 @@ class LibroController extends Controller {
 
         // Guardar la imagen
         $path = $request->file('foto')->store('libros', 'public');
+        $path_final = $this->_PATH_FOTOS . "" . $path;
         Log::info('Imagen guardada en', ['path' => $path]);
 
         // Crear un nuevo libro
@@ -90,7 +92,7 @@ class LibroController extends Controller {
         $libro->titulo = $request->input('titulo');
         $libro->autor = $request->input('autor');
         $libro->genero = $request->input('genero');
-        $libro->foto_url = $path;
+        $libro->foto_url = $path_final;
         $libro->estado = 'disponible';
         $libro->usuario_id = 1; //! Asignamos un valor temporal para usuario_id
 

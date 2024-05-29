@@ -6,7 +6,7 @@
     <div class="container_book">
         <div>
             <picture>
-                <img src="{{ $libro->foto_url }}" alt="{{ $libro->titulo }}">
+                <img src="{{'/storage/' . $libro->foto_url }}" alt="{{ $libro->titulo }}">
             </picture>
         </div>
         <section>
@@ -29,11 +29,14 @@
                 gap: 20px;
                 padding: 20px;
 
+                img {
+                    border-radius: 10px;
+                    width: 100%;
+                }
                 section {
                     padding: 0 15%;
                     text-align: left;
                 }
-
                 h1,
                 p {
                     text-align: left;

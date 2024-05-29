@@ -14,7 +14,7 @@ class Card extends Component
 
     public function mount($libro_id, $foto_url, $titulo, $autor)
     {
-        $_IMG_PATH = 'storage/public/img_books/';
+        $_IMG_PATH = '/storage/';
 
         $this->libro_id = $libro_id;
         $this->foto_url = $_IMG_PATH . $foto_url;
