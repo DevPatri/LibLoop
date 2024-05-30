@@ -15,8 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Panel usuario') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('libros.create')" :active="request()->routeIs('libros.create')">
+                    <x-nav-link :href="route('dashboard.create')" :active="request()->routeIs('dashboard.create')">
                         {{ __('Subir libro') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('dashboard.userId', ['id' => Auth::user()->usuario_id])" :active="request()->routeIs('dashboard.userId')">
+                        {{ __('Libros subidos') }}
                     </x-nav-link>
                 </div>
             </div>

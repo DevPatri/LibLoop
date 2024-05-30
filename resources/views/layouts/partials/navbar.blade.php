@@ -1,7 +1,7 @@
 <header>
     <nav class="container">
         <div class="first">
-            <img class="logo" src="/assets/img/logo_without_back.png" alt="logo">
+            <a href="{{ route('index') }}"><img class="logo" src="/assets/img/logo_without_back.png" alt="logo"></a>
             <h1>LibLoop</h1>
         </div>
         <div class="links">
@@ -9,12 +9,12 @@
             <a href="#">Ayuda</a>
             <a href="#">Contacto</a>
             @if (Auth::check())
-                <a href="{{route('dashboard')}}">{{ Auth::user()->nombre }}</a>
+                <a href="{{ route('dashboard') }}">{{ Auth::user()->nombre }}</a>
             @else
                 <a href="{{ route('login') }}">Iniciar sesión</a>
             @endif
-{{--  !Falta por implementar el botón de log out  --}}
-            {{--  @if(Auth::check())
+            {{--  !Falta por implementar el botón de log out  --}}
+            {{--  @if (Auth::check())
                 <form action="{{route('logout')}}" method="POST">
                     <button type="submit">Log out</button>
                 </form>

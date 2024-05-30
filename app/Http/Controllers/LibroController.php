@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class LibroController extends Controller {
 
-    private $_PATH_FOTOS = 'storage/libros/';
+    private $_PATH_FOTOS = '/storage/libros';
     public function index() {
         $libros = Libro::all();
         return view('libros.index', compact('libros'));
@@ -83,24 +84,23 @@ class LibroController extends Controller {
 
         // Guardar la imagen
         $path = $request->file('foto')->store('libros', 'public');
-        $path_final = $this->_PATH_FOTOS . "" . $path;
         Log::info('Imagen guardada en', ['path' => $path]);
-
+        $pathFinal = $this->_PATH_FOTOS . '/' . basename($path);
         // Crear un nuevo libro
         $libro = new Libro();
         $libro->titulo = $request->input('titulo');
         $libro->autor = $request->input('autor');
         $libro->genero = $request->input('genero');
-        $libro->foto_url = $path_final;
+        $libro->foto_url = $pathFinal;
         $libro->estado = 'disponible';
-        $libro->usuario_id = 1; //! Asignamos un valor temporal para usuario_id
+        $libro->usuario_id = Auth::user()->usuario_id; //* Asignamos el valor del usuario de la sesión
 
         Log::info('Libro creado', $libro->toArray());
 
         $libro->save();
         Log::info('Libro guardado en la base de datos');
 
-        return redirect()->route('libros.index')->with('success', 'Libro subido exitosamente.');
+        return redirect()->route('dashboard.userId')->with('success', 'Libro subido exitosamente.');
     }
 
     //* Busqueda para mostrar un libro y mandarlo a la view 'book'
@@ -130,5 +130,9 @@ class LibroController extends Controller {
         return redirect()->route('libros.index')->with('success', 'Libro eliminado con éxito.');
     }
 
+    public function findByUser($id) {
+        $libros = Libro::where('usuario_id', $id)->get();
+        return view('libros.booksUser', compact('libros'));
+    }
 
 }

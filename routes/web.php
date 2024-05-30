@@ -33,12 +33,18 @@ Route::get('/explore', function () {
 })->name('explore');
 Route::get('/explore/book/{libro_id}', [LibroController::class, 'show'])->name('explore.book');
 
-// 5. Ruta de contacto
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// 5. Ruta de usuario protegidas
+Route::middleware('auth')->group(function (){
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    //->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard/create', [LibroController::class, 'create'])->name('dashboard.create');
+    Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');
+    Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');
+});
 
-
+// 6. Rutas de perfil de usuario
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -49,6 +55,14 @@ require __DIR__ . '/auth.php';
 
 
 /* L I B R O S */
-Route::get('/books/create', [LibroController::class, 'create'])->name('libros.create');
-Route::post('/books', [LibroController::class, 'store'])->name('libros.store');
 Route::get('/books', [LibroController::class, 'index'])->name('libros.index');
+
+
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard/create', [LibroController::class, 'create'])->name('dashboard.create');
+// Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');
+// Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');
+
