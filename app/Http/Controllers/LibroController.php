@@ -86,6 +86,7 @@ class LibroController extends Controller {
         $path = $request->file('foto')->store('libros', 'public');
         Log::info('Imagen guardada en', ['path' => $path]);
         $pathFinal = $this->_PATH_FOTOS . '/' . basename($path);
+
         // Crear un nuevo libro
         $libro = new Libro();
         $libro->titulo = $request->input('titulo');
@@ -100,7 +101,8 @@ class LibroController extends Controller {
         $libro->save();
         Log::info('Libro guardado en la base de datos');
 
-        return redirect()->route('dashboard.userId')->with('success', 'Libro subido exitosamente.');
+        // return redirect()->route('dashboard.userId')->with('success', 'Libro subido exitosamente.');
+        return redirect()->route('dashboard.userId', ['id' => $libro->usuario_id])->with('success', 'Libro subido exitosamente.');
     }
 
     //* Busqueda para mostrar un libro y mandarlo a la view 'book'

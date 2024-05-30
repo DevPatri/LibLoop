@@ -8,8 +8,8 @@
         <div class="banner">
             <p class="text">Un libro cerrado no abre mentes, intercambia y descubre.</p>
             <div class="banner-bt">
-                <a class="btn-primary" href="{{ route('register') }}">Reg&iacute;strate</a>
-                <a class="btn-primary" href="{{ route('login') }}">Inicia sesi&oacute;n</a>
+                <a class="btn-primary" href="{{ route('register.form') }}">Regístrate</a>
+                <a class="btn-primary" href="{{ route('login') }}">Inicia sesión</a>
             </div>
         </div>
         <section>

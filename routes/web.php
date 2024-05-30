@@ -14,8 +14,8 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
 
 // 2. Ruta personalizada de registro de usuario (no usamos la de por defecto de Breeze)
-Route::get('/register', [UsuarioController::class, 'create'])->middleware('guest')->name('register');
-Route::post('/register', [UsuarioController::class, 'store'])->middleware('guest')->name('register');
+Route::get('/register', [UsuarioController::class, 'create'])->middleware('guest')->name('register.form');
+Route::post('/register', [UsuarioController::class, 'store'])->middleware('guest')->name('register.store');
 
 
 /* R U T A S */
