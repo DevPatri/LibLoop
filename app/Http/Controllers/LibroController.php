@@ -31,7 +31,7 @@ class LibroController extends Controller {
     //         $path = $request->file('foto')->store('public/fotos');
     //         $libro->foto_url = $path;
     //     }
-
+        
     //     $libro->save();
 
     //     return redirect()->route('libros.index')->with('success', 'Libro creado con éxito.');
@@ -91,7 +91,7 @@ class LibroController extends Controller {
         $libro->genero = $request->input('genero');
         $libro->foto_url = $path;
         $libro->estado = 'disponible';
-        $libro->usuario_id = 1; //! Asignamos un valor temporal para usuario_id
+        $libro->usuario_id = 1; // Asignamos un valor temporal para usuario_id 
 
         Log::info('Libro creado', $libro->toArray());
 
@@ -101,10 +101,8 @@ class LibroController extends Controller {
         return redirect()->route('libros.index')->with('success', 'Libro subido exitosamente.');
     }
 
-    //* Busqueda para mostrar un libro y mandarlo a la view 'book'
-    public function show($id) {
-        $libro = Libro::find($id);
-        return view('book', compact('libro'));
+    public function show(Libro $libro) {
+        return view('libros.show', compact('libro'));
     }
 
     public function edit(Libro $libro) {
@@ -127,6 +125,6 @@ class LibroController extends Controller {
         $libro->delete();
         return redirect()->route('libros.index')->with('success', 'Libro eliminado con éxito.');
     }
-
+    
 
 }

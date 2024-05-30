@@ -3,28 +3,18 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Models\Libro;
 
 class ExploreLibros extends Component
 {
-    public $libros;
-    protected $listeners = ['librosFiltrados' => 'handleFilterByGender'];
-    public function mount(): void
-    {
+    protected $libros;
+    protected $listeners = ['filterByGender'];
+
+    public function mount(){
         $this->libros = Libro::all();
     }
-    #[On('filter')]
-    public function handleFilterByGender($gender)
-    {
-        $filterBooks = Libro::where('genero', $gender)->get();
-        if ($gender == 'Selecciona') {
-            $filterBooks = Libro::all();
-        }
-
-        $this->libros = $filterBooks;
-
-        // dd($filterBooks);
+    public function filterByGender($gender){
+        $this->libros = Libro::where('genero', $gender)->get();
     }
 
     public function render()
