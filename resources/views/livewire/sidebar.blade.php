@@ -6,8 +6,7 @@
         <div>
             <h4>Filtrar por:</h4>
             <label for="gender">G&eacute;nero</label>
-            <select class="gender" name="gender" wire:model="gender" wire:change="filterByGender($event.target.value)">
-                <option value="">Selecciona</option>
+            <select class="gender" name="gender" id="gender" wire:change="filterByGender($event.target.value)">
                 @foreach ($generos as $genero)
                     <option value="{{ $genero }}">{{ $genero }}</option>
                 @endforeach

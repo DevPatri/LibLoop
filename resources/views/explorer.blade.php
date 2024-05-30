@@ -19,9 +19,4 @@
         grid-template-columns: 1fr 3fr;
         gap: 20px;
     }
-    @media (max-width: 830px){
-        main{
-            grid-template-columns: 1fr;
-        }
-    }
 </style>

@@ -6,7 +6,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Card;
-use App\Http\Controllers\LibroController;
 
 // 1. Ruta de inicio de sesión
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
@@ -31,7 +30,6 @@ Route::get('/', function () {
 Route::get('/explore', function () {
     return view('explorer');
 })->name('explore');
-Route::get('/explore/book/{libro_id}', [LibroController::class, 'show'])->name('explore.book');
 
 // 5. Ruta de contacto
 Route::get('/dashboard', function () {
@@ -49,6 +47,8 @@ require __DIR__ . '/auth.php';
 
 
 /* L I B R O S */
-Route::get('/books/create', [LibroController::class, 'create'])->name('libros.create');
-Route::post('/books', [LibroController::class, 'store'])->name('libros.store');
-Route::get('/books', [LibroController::class, 'index'])->name('libros.index');
+use App\Http\Controllers\LibroController;
+
+Route::get('/libros/create', [LibroController::class, 'create'])->name('libros.create');
+Route::post('/libros', [LibroController::class, 'store'])->name('libros.store');
+Route::get('/libros', [LibroController::class, 'index'])->name('libros.index');
