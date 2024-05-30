@@ -6,7 +6,8 @@
     <div class="container_book">
         <div>
             <picture>
-                <img src="{{'/storage/' . $libro->foto_url }}" alt="{{ $libro->titulo }}">
+                <img src="{{ $libro->foto_url }}" alt="{{ $libro->titulo }}">
+                
             </picture>
         </div>
         <section>
