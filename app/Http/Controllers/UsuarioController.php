@@ -73,6 +73,14 @@ class UsuarioController extends Controller {
         return back()->with('success', 'Preferencias añadidas correctamente.');
     }
 
+    // Mostrar la vista de favoritos
+    public function favoritos() {
+        $usuario = Auth::user();
+        $favoritos = $usuario->librosFavoritos;
+        return view('favoritos.favoritos', compact('favoritos'));
+    }
+    
+
     // // Método para mostrar todos los usuarios (la info de Usuario)
     // public function index() {
     //     $usuarios = Usuario::all();                          // Obtiene todos los usuarios 

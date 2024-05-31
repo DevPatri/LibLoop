@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Libro;
+use App\Models\Genero;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -9,68 +10,19 @@ use Illuminate\Support\Facades\Auth;
 class LibroController extends Controller {
 
     private $_PATH_FOTOS = '/storage/libros';
+
     public function index() {
         $libros = Libro::all();
         return view('libros.index', compact('libros'));
     }
 
     public function create() {
-        return view('libros.create');
+        $generos = Genero::all(); 
+        return view('libros.create', compact('generos'));
     }
 
-    // public function store(Request $request) {
-    //     $validated = $request->validate([
-    //         'titulo' => 'required',
-    //         'autor' => 'required',
-    //         'genero' => 'required',
-    //         'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //         'usuario_id' => 'required|exists:usuarios,id'
-    //     ]);
-
-    //     $libro = new Libro($validated);
-
-    //     if ($request->hasFile('foto')) {
-    //         $path = $request->file('foto')->store('public/fotos');
-    //         $libro->foto_url = $path;
-    //     }
-
-    //     $libro->save();
-
-    //     return redirect()->route('libros.index')->with('success', 'Libro creado con éxito.');
-    // }
-
-
-
-
-    // public function store(Request $request) {
-
-    //     // Validar los datos del formulario
-    //     $request->validate([
-    //         'titulo' => 'required|string|max:255',
-    //         'autor' => 'required|string|max:255',
-    //         'genero' => 'required|string|max:100',
-    //         'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //         'usuario_id' => 'nullable|integer|exists:usuarios,usuario_id', // Validar usuario_id
-    //     ]);
-
-    //     // Guardar la imagen
-    //     $path = $request->file('foto')->store('libros', 'public');
-
-    //     // Crear un nuevo libro
-    //     $libro = new Libro();
-    //     $libro->titulo = $request->input('titulo');
-    //     $libro->autor = $request->input('autor');
-    //     $libro->genero = $request->input('genero');
-    //     $libro->foto_url = $path;
-    //     $libro->estado = $request->input('estado', 'disponible'); // Hemos puesto el estado del libro por defecto en disponible cuando se crea
-    //     $libro->usuario_id = $request->input('usuario_id'); // Asignar usuario_id manualmente
-
-    //     $libro->save();
-
-    //     return redirect()->route('libros.index')->with('success', 'Libro subido exitosamente.');
-    // }
-
     public function store(Request $request) {
+
         // Validar los datos del formulario
         $validated = $request->validate([
             'titulo' => 'required|string|max:255',
@@ -135,6 +87,15 @@ class LibroController extends Controller {
     public function findByUser($id) {
         $libros = Libro::where('usuario_id', $id)->get();
         return view('libros.booksUser', compact('libros'));
+    }
+
+    // Métodos para el DashBoard del usuario (Favoritos e Intercambios)
+    public function getDashboardData() {
+        $usuario = Auth::user();
+        $favoritos = $usuario->librosFavoritos;
+        $solicitudesIntercambio = $usuario->intercambiosPropios()->orWhere('solicitante_id', $usuario->usuario_id)->with('libro')->get();
+    
+        return view('dashboard', compact('favoritos', 'solicitudesIntercambio'));
     }
 
 }

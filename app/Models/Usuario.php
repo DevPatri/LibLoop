@@ -33,7 +33,6 @@ class Usuario extends Authenticatable {
         return $this->contrasena;
     }
     
-
      // Relación de libros publicados por el usuario
      public function libros() {
         return $this->hasMany(Libro::class, 'usuario_id');

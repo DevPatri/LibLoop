@@ -6,36 +6,48 @@
     </x-slot>
 
     <div class="py-6 h-screen contain">
-        {{--  <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __('Estás dentro!') }}
-                </div>
-            </div>
-        </div>  --}}
         <div class="flex flex-col lg:flex-row items-center justify-center">
-            <div class="max-w-2xl w-full mx-auto sm:px-4 sm:m-3">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg h-80">
-                    <div class="p-6 text-gray-900">
-                        {{ __('Lista favoritos') }}
-                        <hr>
-                        <div>
-                            {{--  @foreach ($favoritos as $favorito)
 
-                            @endforeach  --}}
+            <!-- Lista de Favoritos -->
+            <div class="max-w-2xl w-full mx-auto sm:px-4 sm:m-3">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg h-96">
+                    <div class="p-6 text-gray-900">
+                        <div class="flex justify-between items-center mb-1">
+                            {{ __('Favoritos') }}
+                            <a href="{{ route('favoritos.index') }}" style="color: #BC4749">Ver todos</a>
+                        </div>
+                        <hr>
+                        <div class="overflow-y-auto h-80">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> <!-- Grid layout -->
+                                @foreach ($favoritos as $favorito)
+                                    <div class="flex items-center justify-center my-4"> 
+                                        <a href="{{ route('explore.book', $favorito->libro_id) }}" class="flex items-center">
+                                            <img src="{{ $favorito->foto_url }}" alt="{{ $favorito->titulo }}" class="w-20 h-24 object-cover mr-4">
+                                            <span class="text-lg">{{ $favorito->titulo }}</span>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Solicitudes de Intercambio -->
             <div class="max-w-2xl w-full mx-auto sm:px-4 sm:m-3">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg h-80">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg h-96">
                     <div class="p-6 text-gray-900">
                         {{ __('Pendientes aceptar') }}
                         <hr>
-                        <div>
-                            {{--  @foreach ($pendientes as $pendiente)
-
-                            @endforeach  --}}
+                        <div class="overflow-y-auto h-80">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> <!-- Grid layout -->
+                                @foreach ($solicitudesIntercambio as $solicitud)
+                                    <div class="flex items-center justify-center my-4"> <!-- Centrar cada item -->
+                                        <img src="{{ $solicitud->libro->foto_url }}" alt="{{ $solicitud->libro->titulo }}" class="w-20 h-24 object-cover mr-4">
+                                        <span class="text-lg">{{ $solicitud->libro->titulo }} - {{ $solicitud->estado }}</span>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,5 +62,4 @@
             background-repeat: no-repeat;
         }
     </style>
-
 </x-app-layout>

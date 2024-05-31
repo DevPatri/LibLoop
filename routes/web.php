@@ -34,14 +34,19 @@ Route::get('/explore', function () {
 Route::get('/explore/book/{libro_id}', [LibroController::class, 'show'])->name('explore.book');
 
 // 5. Ruta de usuario protegidas
-Route::middleware('auth')->group(function (){
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [LibroController::class, 'getDashboardData'])->name('dashboard');
+
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+    
     //->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/dashboard/create', [LibroController::class, 'create'])->name('dashboard.create');
     Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');
     Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');
+    Route::get('/favoritos', [UsuarioController::class, 'favoritos'])->name('favoritos.index');
 });
 
 // 6. Rutas de perfil de usuario

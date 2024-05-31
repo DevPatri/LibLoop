@@ -58,7 +58,11 @@
                     <!-- Género -->
                     <div class="input-group">
                         <label for="genero">Género:</label>
-                        <input type="text" id="genero" name="genero" required>
+                        <select id="genero" name="genero" required>
+                            @foreach ($generos as $genero)
+                                <option value="{{ $genero->nombre }}">{{ $genero->nombre }}</option>
+                            @endforeach
+                        </select>                        
                     </div>
 
                     <!-- Foto del libro -->

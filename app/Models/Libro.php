@@ -24,7 +24,7 @@ class Libro extends Model {
         return $this->hasMany(Intercambio::class, 'libro_id');
     }
 
-    public function favoritosDeUsuarios() {
+    public function usuarioFavoritos() {
         return $this->belongsToMany(Usuario::class, 'favoritos', 'libro_id', 'usuario_id');  
     }
 
