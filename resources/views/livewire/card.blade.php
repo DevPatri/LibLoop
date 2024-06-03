@@ -10,17 +10,25 @@
             </div>
         </article>
     </a>
+    <button class="btn-inter" wire:click="añadirIntercambio">
+        <i class="">Intercambiar</i>
+    </button>
     <button wire:click="toggleFavorito" class="favorito-btn">
         <i class="fa fa-heart{{ $esFavorito ? '' : '-o' }}"></i>
     </button>
 
     <style>
         .card-wrapper {
+            {{--  border: 1px solid #ccc;
+            border-radius: 10px 10px 0 0;  --}}
             position: relative;
             display: inline-block;
             margin: 10px;
         }
-
+        .card-wrapper a {
+            text-decoration: none;
+            color: inherit;
+        }
         .card {
             display: flex;
             flex-direction: column;
@@ -52,9 +60,9 @@
         }
 
         .card h3, .card p {
+            line-height: 1.4em;
             text-align: left;
             padding: 0 10px;
-            text-decoration: none;
         }
 
         .card:hover img {
@@ -71,9 +79,38 @@
             top: 10px;
             right: 10px;
         }
+        .favorito-btn:hover {
+            scale: 1.2;
+        }
 
         .favorito-btn .fa-heart-o {
             color: #bdc3c7; /* Color del corazón vacío */
+        }
+        .btn-inter {
+            width: fit-content;
+            padding: 5px 10px;
+            margin: 5px;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            border: none;
+            border-radius: 10px;
+            color: rgb(255,255,255);
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: rgba(82, 122, 89, 0.7);
+            box-sizing: border-box;
+            align-self: flex-end;
+
+            &:hover {
+                color: rgb(255, 255, 255);
+                background-color: rgb(168, 196, 173);
+            }
+
+            &:active {
+                background-color: rgb(110, 163, 119);
+                color: rgb(255, 255, 255);
+            }
         }
     </style>
 

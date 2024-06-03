@@ -7,7 +7,7 @@
         <div>
             <picture>
                 <img src="{{ $libro->foto_url }}" alt="{{ $libro->titulo }}">
-                
+
             </picture>
         </div>
         <section>
@@ -17,7 +17,7 @@
             <p><strong>Estado: </strong>{{ $libro->estado }}</p>
             <p><strong>Usuario: </strong>{{ $libro->usuario_id }}</p>
             <div class="btn-container">
-                <a class="btn-secondary" href="#">Intercambiar</a>
+                <button wire:click="" class="btn-secondary">Intercambiar</button>
                 <a class="btn-secondary" href="{{ route('explore') }}">volver</a>
             </div>
         </section>
@@ -34,10 +34,12 @@
                     border-radius: 10px;
                     width: 100%;
                 }
+
                 section {
                     padding: 0 15%;
                     text-align: left;
                 }
+
                 h1,
                 p {
                     text-align: left;

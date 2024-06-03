@@ -121,20 +121,20 @@
         text-decoration: none !important;
         font-weight: normal;
         padding: 8px;
-        color: #386641; 
+        color: #386641;
         transition: color 0.3s, font-weight 0.3s;
-        border-bottom: 2px solid transparent; 
+        border-bottom: 2px solid transparent;
     }
 
     .custom-nav-link:hover {
         text-decoration: none !important;
-        color: #BC4749; 
-        border-bottom: 2px solid transparent; 
+        color: #BC4749;
+        border-bottom: 2px solid transparent;
     }
 
     .custom-nav-link.active {
         font-weight:bold;
         color: #386641;
-        border-bottom: none !important; 
+        border-bottom: none !important;
     }
 </style>
