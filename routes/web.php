@@ -1,12 +1,16 @@
 <?php
 
-/* A U T E N T I F I C A C I Ó N */
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Card;
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\IntercambioController;
+
+
+                            /* A U T E N T I F I C A C I Ó N */
 
 // 1. Ruta de inicio de sesión
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
@@ -18,7 +22,7 @@ Route::get('/register', [UsuarioController::class, 'create'])->middleware('guest
 Route::post('/register', [UsuarioController::class, 'store'])->middleware('guest')->name('register.store');
 
 
-/* R U T A S */
+                                    /* R U T A S */
 
 // 3. Ruta de inicio
 Route::get('/', function () {
@@ -33,7 +37,7 @@ Route::get('/explore', function () {
 })->name('explore');
 Route::get('/explore/book/{libro_id}', [LibroController::class, 'show'])->name('explore.book');
 
-// 5. Ruta de usuario protegidas
+// 5. Ruta de usuario protegidas (dashboard del usuario autenticado)
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [LibroController::class, 'getDashboardData'])->name('dashboard');
@@ -47,6 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');
     Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');
     Route::get('/dashboard/favoritos', [UsuarioController::class, 'favoritos'])->name('favoritos.index');
+    Route::get('/dashboard/intercambios', [IntercambioController::class, 'index'])->name('intercambios.index');
+
 });
 
 // 6. Rutas de perfil de usuario
@@ -59,7 +65,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 
-/* L I B R O S */
+                                    /* L I B R O S */
 Route::get('/books', [LibroController::class, 'index'])->name('libros.index');
 
 
