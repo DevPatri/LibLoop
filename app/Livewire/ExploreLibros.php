@@ -10,8 +10,10 @@ use App\Models\Genero;
 class ExploreLibros extends Component {
 
     public $libros;
+    public $generos;
+    public $selectedGenero;
     protected $listeners = ['librosFiltrados' => 'handleFilterByGender'];
-    
+
     public function mount(): void  {
         $this->libros = Libro::all();
         $this->generos = Genero::all();      // Obtener los géneros desde la base de datos

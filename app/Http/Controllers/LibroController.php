@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Libro;
 use App\Models\Genero;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class LibroController extends Controller {
     }
 
     public function create() {
-        $generos = Genero::all(); 
+        $generos = Genero::all();
         return view('libros.create', compact('generos'));
     }
 
@@ -91,11 +92,18 @@ class LibroController extends Controller {
 
     // Métodos para el DashBoard del usuario (Favoritos e Intercambios)
     public function getDashboardData() {
-        $usuario = Auth::user();
-        $favoritos = $usuario->librosFavoritos;
-        $solicitudesIntercambio = $usuario->intercambiosPropios()->orWhere('solicitante_id', $usuario->usuario_id)->with('libro')->get();
-    
-        return view('dashboard', compact('favoritos', 'solicitudesIntercambio'));
+        $user = Auth::user();
+        $favoritos = $user->librosFavoritos;
+        $solicitudesIntercambio = $user->intercambiosPropios()->with('libro')->get();
+        $pendientesItercambio = $user->intercambiosSolicitados()->with('libro')->get();
+        // dd($solicitudesIntercambio, $pendientesItercambio);
+        return view('dashboard')->with(
+            [
+                'favoritos' => $favoritos,
+                'solicitudesIntercambio' => $solicitudesIntercambio,
+                'pendientesItercambio' => $pendientesItercambio
+            ]
+        );
     }
 
 }
