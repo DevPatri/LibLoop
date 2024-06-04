@@ -23,6 +23,9 @@
                     <a href="{{ route('favoritos.index') }}" class="custom-nav-link {{ request()->routeIs('favoritos.index') ? 'active' : '' }}">
                         {{ __('Favoritos') }}
                     </a>
+                    <a href="{{ route('intercambios.index') }}" class="custom-nav-link {{ request()->routeIs('intercambios.index') ? 'active' : '' }}">
+                        {{ __('Intercambios') }}
+                    </a>
                 </div>
             </div>
 

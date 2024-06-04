@@ -51,8 +51,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');
     Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');
     Route::get('/dashboard/favoritos', [UsuarioController::class, 'favoritos'])->name('favoritos.index');
+    
     Route::get('/dashboard/intercambios', [IntercambioController::class, 'index'])->name('intercambios.index');
-
+    Route::post('/intercambios', [IntercambioController::class, 'store'])->name('intercambios.store');
+    Route::post('/intercambios/{intercambio}/confirm', [IntercambioController::class, 'confirmReception'])->name('intercambios.confirm');
+    Route::delete('/intercambios/{intercambio}', [IntercambioController::class, 'destroy'])->name('intercambios.destroy');
 });
 
 // 6. Rutas de perfil de usuario

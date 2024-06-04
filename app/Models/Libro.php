@@ -15,7 +15,6 @@ class Libro extends Model {
     protected $primaryKey = 'libro_id';
     protected $fillable = ['titulo', 'autor', 'genero', 'foto_url', 'estado', 'usuario_id'];
 
-    // Relaciones
     public function usuario() {
         return $this->belongsTo(Usuario::class, 'usuario_id');
     }
@@ -25,10 +24,9 @@ class Libro extends Model {
     }
 
     public function usuarioFavoritos() {
-        return $this->belongsToMany(Usuario::class, 'favoritos', 'libro_id', 'usuario_id');  
+        return $this->belongsToMany(Usuario::class, 'favoritos', 'libro_id', 'usuario_id');
     }
 
-    // Establecer valor predeterminado para 'estado'
     protected static function boot() {
         parent::boot();
 
@@ -38,5 +36,4 @@ class Libro extends Model {
             }
         });
     }
-
 }
