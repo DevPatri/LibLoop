@@ -155,13 +155,14 @@
         height: 35px;
         border: none;
         border-radius: 10px;
-        color: rgb(34, 34, 34);
+        color: #386641;
         font-size: 1.3rem;
         cursor: pointer;
         line-height: 35px;
         background-color: rgb(255, 255, 255);
         border: 1px solid rgb(86, 86, 86);
         transition: all 0.5s ease-in-out;
+        text-decoration: none;
     }
 
     .card-bt a:hover {
