@@ -8,16 +8,16 @@
         <div class="banner-overlay"></div>
         <p class="text">Un libro cerrado no abre mentes, intercambia y descubre.</p>
         <div class="banner-bt">
-            <a class="button-name" href="{{ route('register.form') }}">Regístrate</a>
-            <a class="button-name" href="{{ route('login') }}">Inicia sesión</a>
+            <a class="btn-1" href="{{ route('register.form') }}">Regístrate</a>
+            <a class="btn-1" href="{{ route('login') }}">Inicia sesión</a>
         </div>
     </div>
     <section>
         <div class="card card-bt">
-            <a>Novedades</a>
-            <a>Más populares</a>
-            <a>Géneros</a>
-            <a href="{{ route('explore') }}">Explora</a>
+            <a class="button" href="#">Novedades</a>
+            <a class="button" href="#">Más populares</a>
+            <a class="button" href="#">Géneros</a>
+            <a class="button" href="{{ route('explore') }}">Explora</a>
         </div>
         {{-- mostramos 3 libros para la portada --}}
         @foreach ($books as $book)
@@ -45,7 +45,7 @@
 
     .banner {
         position: relative;
-        background-image: url('./assets/img/front-pic.jpeg');
+        background-image: url('./assets/img/front-pic1.jpeg');
         background-size: cover;
         background-position: center center;
         height: 450px;
@@ -83,58 +83,48 @@
         white-space: normal;
         color: white;
         text-shadow: 0 0 10px black;
+        margin-top: -35px; 
     }
 
     .banner-bt {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
+        gap: 20px;
         width: 70%;
     }
-
-    .button-name {
+    .btn-1 {
+        --bg: rgba(255, 255, 255, 0.5); 
+        --text-color:white; 
+        display: flex;
         align-items: center;
-        appearance: none;
-        background-color: rgba(252, 252, 253, 0.8); /* Fondo más transparente */
-        border-radius: 4px;
-        border-width: 0;
-        box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px, rgba(45, 35, 66, 0.15) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-        box-sizing: border-box;
-        color: #BC4749;
-        cursor: pointer;
-        display: inline-flex;
-        font-family: "JetBrains Mono", monospace;
-        height: 48px;
         justify-content: center;
-        line-height: 1;
-        list-style: none;
-        overflow: hidden;
-        padding-left: 16px;
-        padding-right: 16px;
+        width: 200px; 
         position: relative;
-        text-align: left;
+        background: var(--bg);
+        color: var(--text-color); 
+        padding: 1em;
+        text-transform: uppercase;
+        transition: 0.2s;
+        border-radius: 5px;
+        letter-spacing: 3px;
+        border: 1px solid rgba(255, 255, 255, 0.045);
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 7px 2px, rgba(0, 0, 0, 0.3) 0px 8px 5px; 
+        -webkit-background-clip: text;
         text-decoration: none;
-        transition: box-shadow .15s, transform .15s;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        white-space: nowrap;
-        will-change: box-shadow, transform;
-        font-size: 18px;
+        font-family: monospace;
+    }
+    .btn-1:hover {
+        opacity: 1;
+        transform: scale(1.1); 
     }
 
-    .button-name:focus {
-        box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-    }
-
-    .button-name:hover {
-        box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #bc474990 0 -3px 0 inset;
-        transform: translateY(-2px);
-    }
-
-    .button-name:active {
-        box-shadow: #D6D6E7 0 3px 7px inset;
-        transform: translateY(2px);
+    .text {
+        font-size: clamp(1.5rem, 2.5vw, 2.7rem);
+        word-wrap: break-word;
+        white-space: normal;
+        color: white;
+        text-shadow: 0 0 10px black;
     }
 
     section {
@@ -198,6 +188,4 @@
             margin: 0;
         }
     }
-
-
 </style>
