@@ -15,6 +15,10 @@
             <button class="btn-inter" wire:click="añadirIntercambio">
                 <i class="">Intercambiar</i>
             </button>
+        @else
+            <a href="{{ route('libros.edit', $libro_id) }}" class="btn-inter">
+                Editar
+            </a>
         @endif
     </div>
     <button wire:click="toggleFavorito" class="favorito-btn">
@@ -94,7 +98,7 @@
             justify-content: center;
             padding: 0 10px;
         }
-        .action-buttons > button {
+        .action-buttons > a, .action-buttons > button {
             width: 100%;
             padding: 8px 0;
             margin-bottom: 5px;

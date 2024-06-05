@@ -3,15 +3,12 @@
 @section('title', 'LibLoop')
 
 @section('content')
-
     <div class="container_book">
-        
         <div>
             <picture>
                 <img src="{{ $libro->foto_url }}" alt="{{ $libro->titulo }}">
             </picture>
         </div>
-
         <section>
             <h1>{{ $libro->titulo }}</h1>
             <p><strong>Autor: </strong>{{ $libro->autor }}</p>
@@ -27,11 +24,12 @@
                         <input type="hidden" name="propietario_id" value="{{ $libro->usuario_id }}">
                         <button type="submit" class="btn-secondary">Intercambiar</button>
                     </form>
+                @else
+                    <a href="{{ route('libros.edit', $libro->libro_id) }}" class="btn-secondary">Editar</a>
                 @endif
                 <a class="btn-secondary" href="{{ route('explore') }}">volver</a>
             </div>
         </section>
-
         <style>
             .container_book {
                 margin: 0 auto;

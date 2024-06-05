@@ -68,7 +68,8 @@ class LibroController extends Controller {
 
     // Método para editar un libro
     public function edit(Libro $libro) {
-        return view('libros.book-edit', compact('libro'));
+        $generos = Genero::all();
+        return view('libros.book-edit', compact('libro', 'generos'));
     }
 
     // Método para actualizar un libro
@@ -81,7 +82,7 @@ class LibroController extends Controller {
         ]);
 
         $libro->update($validated);
-        return redirect()->route('libros.index')->with('success', 'Libro actualizado con éxito.');
+        return redirect()->route('libros.show', $libro)->with('success', 'Libro actualizado con éxito.');
     }
 
     public function destroy(Libro $libro) {
