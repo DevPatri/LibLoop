@@ -1,5 +1,4 @@
 <div class="explore">
-    <h2>Explora</h2>
     <div class="explore-cards">
         @foreach ($libros as $libro)
             @livewire('card', [
@@ -21,6 +20,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
+            margin-top: 20px;
         }
     </style>
 </div>

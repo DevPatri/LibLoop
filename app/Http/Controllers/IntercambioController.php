@@ -10,54 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class IntercambioController extends Controller {
     
-    // public function index() {
-    //     $userId = Auth::id();
-
-    //     $intercambiosSolicitados = Intercambio::with(['libro', 'solicitante', 'propietario'])
-    //         ->where('solicitante_id', $userId)
-    //         ->where('estado', '!=', 'completado')
-    //         ->get();
-
-    //     $solicitudesRecibidasPendientes = Intercambio::with(['libro', 'solicitante', 'propietario'])
-    //         ->where('propietario_id', $userId)
-    //         ->where('estado', 'solicitado')
-    //         ->get();
-
-    //     $solicitudesRecibidasAceptadas = Intercambio::with(['libro', 'solicitante', 'propietario'])
-    //         ->where('propietario_id', $userId)
-    //         ->where('estado', 'pendiente')
-    //         ->get();
-
-    //     $intercambiosCompletados = Intercambio::with(['libro', 'solicitante', 'propietario'])
-    //         ->where(function($query) use ($userId) {
-    //             $query->where('solicitante_id', $userId)
-    //                   ->orWhere('propietario_id', $userId);
-    //         })
-    //         ->where('estado', 'completado')
-    //         ->get();
-
-    //     return view('intercambios.index', compact(
-    //         'intercambiosSolicitados', 
-    //         'solicitudesRecibidasPendientes', 
-    //         'solicitudesRecibidasAceptadas', 
-    //         'intercambiosCompletados'
-    //     ));
-    // }
-
-    // public function store(Request $request) {
-    //     $validated = $request->validate([
-    //         'libro_id' => 'required|exists:libros,libro_id',
-    //         'solicitante_id' => 'required|exists:usuarios,usuario_id',
-    //         'propietario_id' => 'required|exists:usuarios,usuario_id'
-    //     ]);
-    
-    //     $intercambio = new Intercambio($validated);
-    //     $intercambio->estado = 'solicitado';
-    //     $intercambio->save();
-    
-    //     return redirect()->route('intercambios.index')->with('success', 'Intercambio solicitado con éxito.');
-    // }
-
+    // Método para mostrar la vista de intercambios en función del estado del libro
     public function index() {
         $userId = Auth::id();
     
@@ -92,6 +45,7 @@ class IntercambioController extends Controller {
         ));
     }
     
+    // Método para solicitar un intercambio
     public function store(Request $request) {
         $validated = $request->validate([
             'libro_id' => 'required|exists:libros,libro_id',
@@ -123,10 +77,7 @@ class IntercambioController extends Controller {
         return redirect()->route('intercambios.index')->with('success', 'Intercambio solicitado con éxito.');
     }
     
-    
-    
-    
-
+    // Método para confirmar la recepción de un intercambio (botón marcar como recibido)
     public function confirmReception(Intercambio $intercambio) {
         $intercambio->estado = 'completado';
         $intercambio->save();
@@ -142,6 +93,7 @@ class IntercambioController extends Controller {
         return back()->with('success', 'Intercambio completado. Puntos deducidos.');
     }
 
+    // Método para cancelar un intercambio (botón cancelar)
     public function destroy(Intercambio $intercambio) {
         $libro = $intercambio->libro;
 

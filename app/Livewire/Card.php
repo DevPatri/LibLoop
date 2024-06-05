@@ -7,30 +7,32 @@ use App\Models\Intercambio;
 use App\Models\Libro;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\EsPropioTrait; 
 
-class Card extends Component
-{
+class Card extends Component {
+
+    use EsPropioTrait;
+
     public $titulo;
     public $foto_url;
     public $autor;
     public $libro_id;
     public $esFavorito;
     public $esIntercambio;
-    public $esPropio;
 
-    public function mount($libro_id, $foto_url, $titulo, $autor)
-    {
+    // Método para inicializar el componente
+    public function mount($libro_id, $foto_url, $titulo, $autor) {
         $this->libro_id = $libro_id;
         $this->foto_url = $foto_url;
         $this->titulo = $titulo;
         $this->autor = $autor;
         $this->esFavorito = Auth::check() && Auth::user()->librosFavoritos()->where('favoritos.libro_id', $libro_id)->exists();
         $this->esIntercambio = Auth::check() && Auth::user()->intercambiosSolicitados()->where('intercambios.libro_id', $libro_id)->exists();
-        $this->esPropio = Auth::check() && Libro::find($libro_id)->usuario_id == Auth::id();
+        $this->verificarPropiedad($libro_id);  // Usamos el trait para verificar si es propio
     }
 
-    public function render()
-    {
+    // Método para renderizar la vista
+    public function render() {
         return view('livewire.card', [
             'libro_id' => $this->libro_id,
             'foto_url' => $this->foto_url,
@@ -42,14 +44,14 @@ class Card extends Component
         ]);
     }
 
-    public function takeBooks()
-    {
+    // Método para mostrar los 3 primeros libros en la lista de inicio/home
+    public function takeBooks() {
         $books = Libro::take(3)->get();
         return $books;
     }
 
-    public function toggleFavorito()
-    {
+    // Método para añadir un libro a la lista de favoritos
+    public function toggleFavorito() {
         if (!Auth::check()) {
             return redirect('register.form')->with('error', 'Ups! Necesitas registrarte.');
         }
@@ -59,8 +61,8 @@ class Card extends Component
         $this->esFavorito = !$this->esFavorito;
     }
 
-    public function añadirIntercambio()
-    {
+    // Método para añadir un libro a la lista de intercambios
+    public function añadirIntercambio() {
         if (!Auth::check()) {
             return redirect('register.form')->with('error', 'Ups! Necesitas registrarte.');
         }
@@ -97,5 +99,8 @@ class Card extends Component
 
         session()->flash('success', 'Intercambio solicitado con éxito.');
         \Log::info('Intercambio creado', ['intercambio' => $intercambio]);
+
+        return redirect()->route('intercambios.index');
     }
+
 }

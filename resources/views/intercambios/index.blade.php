@@ -1,10 +1,12 @@
 <x-app-layout>
     <div class="py-10 min-h-screen items-center justify-center contain flex-col text-center">
+
         <x-slot name="header">
             <h1 class="font-semibold text-xl text-white leading-tight py-5">
                 {{ __('Intercambios') }}
             </h1>
         </x-slot>
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <!-- Intercambios Solicitados por Ti -->
             <div class="bg-white p-4 rounded shadow">
@@ -67,7 +69,9 @@
                     @endforeach
                 </div>
             </div>
+
         </div>
+        
     </div>
     <style>
         .contain {
@@ -75,7 +79,7 @@
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
-            min-height: 100vh; /* Asegurar que la imagen cubra toda la altura del contenido */
+            min-height: 100vh; /* imagen cubre toda la altura del contenido */
         }
         .divider {
             position: absolute;

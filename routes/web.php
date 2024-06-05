@@ -29,34 +29,32 @@ Route::get('/', function () {
     $cardBooks = new Card();
     $books = $cardBooks->takeBooks();
     return view('index')->with('books', $books);
-})->name('index');
+})->name('index');                                                                                     // Ruta para mostrar la vista de inicio
 
-// 4. Ruta de exploración
-Route::get('/explore', function () {
-    return view('explorer');
-})->name('explore');
-Route::get('/explore/book/{libro_id}', [LibroController::class, 'show'])->name('explore.book');
+
+// 4. Ruta de exploración + detalles de libro
+Route::get('/explore', function () {  return view('explorer'); })->name('explore');                 // Ruta para mostrar la vista con la lista de todos los libros 
+
+Route::get('/explore/book/{libro_id}', [LibroController::class, 'show'])->name('explore.book');   // Ruta para mostrar los detalles de un libro 
 
 // 5. Ruta de usuario protegidas (dashboard del usuario autenticado)
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', [LibroController::class, 'getDashboardData'])->name('dashboard');
+    Route::get('/dashboard', [LibroController::class, 'getDashboardData'])->name('dashboard');                                                       // Ruta para mostrar el dashboard
+    Route::get('/dashboard/create', [LibroController::class, 'create'])->name('dashboard.create');                                                  // Ruta para mostrar el formulario de creación                                              
+    Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');                                                   // Ruta para crear un libro
+    Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');                                         // Ruta para mostrar los libros del usuario  
+    Route::get('/dashboard/favoritos', [UsuarioController::class, 'favoritos'])->name('favoritos.index');                                        // Ruta para mostrar los libros favoritos
 
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('dashboard');
+    Route::get('/dashboard/intercambios', [IntercambioController::class, 'index'])->name('intercambios.index');                                // Ruta para mostrar los intercambios
+    Route::post('/intercambios', [IntercambioController::class, 'store'])->name('intercambios.store');                                        // Ruta para solicitar un intercambio
+    Route::post('/intercambios/{intercambio}/confirm', [IntercambioController::class, 'confirmReception'])->name('intercambios.confirm');    // Ruta para confirmar la recepción de un libro
+    Route::delete('/intercambios/{intercambio}', [IntercambioController::class, 'destroy'])->name('intercambios.destroy');                  // Ruta para eliminar un intercambio
 
-    //->middleware(['auth', 'verified'])->name('dashboard');
-    Route::get('/dashboard/create', [LibroController::class, 'create'])->name('dashboard.create');
-    Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');
-    Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');
-    Route::get('/dashboard/favoritos', [UsuarioController::class, 'favoritos'])->name('favoritos.index');
-
-    Route::get('/dashboard/intercambios', [IntercambioController::class, 'index'])->name('intercambios.index');
-    Route::post('/intercambios', [IntercambioController::class, 'store'])->name('intercambios.store');
-    Route::post('/intercambios/{intercambio}/confirm', [IntercambioController::class, 'confirmReception'])->name('intercambios.confirm');
-    Route::delete('/intercambios/{intercambio}', [IntercambioController::class, 'destroy'])->name('intercambios.destroy');
-});
+    Route::get('/libros/{libro}', [LibroController::class, 'show'])->name('libros.show');                                                 // Ruta para mostrar los detalles de un libro
+    Route::get('/libros/{libro}/edit', [LibroController::class, 'edit'])->name('libros.edit');                                           // Ruta para mostrar el formulario de edición
+    Route::put('/libros/{libro}', [LibroController::class, 'update'])->name('libros.update');                                           // Ruta para actualizar el libro
+}); 
 
 // 6. Rutas de perfil de usuario
 Route::middleware('auth')->group(function () {
@@ -69,14 +67,4 @@ require __DIR__ . '/auth.php';
 
 
                                     /* L I B R O S */
-Route::get('/books', [LibroController::class, 'index'])->name('libros.index');
-
-
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-// Route::get('/dashboard/create', [LibroController::class, 'create'])->name('dashboard.create');
-// Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');
-// Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');
-
+// Route::get('/books', [LibroController::class, 'index'])->name('libros.index');

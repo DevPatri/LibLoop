@@ -1,8 +1,5 @@
 <div>
-    <nav>
-        <div>
-            <h3>Filtros</h3>
-        </div>
+    <nav class = "container">
         <div>
             <h4>Filtrar por:</h4>
             <label for="gender">G&eacute;nero</label>
@@ -15,6 +12,9 @@
         </div>
     </nav>
     <style>
+        .container {
+            margin-top: 10px;     /* Mirar que coincida con mt de explore-libros.blade.php */
+        }
         .gender{
             width: fit-content;
             padding: 5px;

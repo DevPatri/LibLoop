@@ -29,5 +29,9 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
+
+        .contain h1 {
+            color: white;
+        }
     </style>
 </x-app-layout>

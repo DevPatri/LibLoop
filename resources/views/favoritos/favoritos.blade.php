@@ -31,6 +31,7 @@
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
+            min-height: 150vh; /* imagen cubre toda la altura del contenido */
         }
     </style>
 </x-app-layout>
