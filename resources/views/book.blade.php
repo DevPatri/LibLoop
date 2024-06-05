@@ -7,7 +7,6 @@
         <div>
             <picture>
                 <img src="{{ $libro->foto_url }}" alt="{{ $libro->titulo }}">
-
             </picture>
         </div>
         <section>

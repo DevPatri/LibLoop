@@ -1,4 +1,4 @@
-<div class="card-wrapper">
+<div class="card-wrapper {{ $estado == 'completado' ? 'blur' : '' }}">
     <a href="{{ route('explore.book', ['libro_id' => $intercambio->libro->libro_id]) }}">
         <article class="card">
             <picture>
@@ -13,7 +13,7 @@
     <div class="action-buttons">
         @if($intercambio->estado != 'completado')
             <div class="action-row">
-                @if($intercambio->propietario_id == Auth::id())
+                @if($intercambio->propietario_id == Auth::id() && $intercambio->estado == 'solicitado')
                     <button class="btn-accept" wire:click="accept">
                         Aceptar
                     </button>
@@ -22,11 +22,13 @@
                     </button>
                 @endif
             </div>
-            <div class="action-row2">
-                <button class="btn-complete" wire:click="complete">
-                    Marcar como Intercambiado
-                </button>
-            </div>
+            @if($intercambio->estado == 'pendiente')
+                <div class="action-row2">
+                    <button class="btn-complete" wire:click="complete">
+                        Marcar como Intercambiado
+                    </button>
+                </div>
+            @endif
         @endif
     </div>
     <style>
@@ -39,6 +41,9 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             overflow: hidden;
             width: 200px;
+        }
+        .card-wrapper.blur {
+            filter: blur(0.9px);
         }
         .card-wrapper a {
             text-decoration: none;

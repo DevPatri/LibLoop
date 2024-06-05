@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class IntercambioCard extends Component {
 
     public $intercambio;
+    public $estado;
 
     public function mount(Intercambio $intercambio) {
         $this->intercambio = $intercambio;
+        $this->estado = $intercambio->estado;
     }
 
     public function remove() {
@@ -21,15 +23,19 @@ class IntercambioCard extends Component {
     }
 
     public function accept() {
-        $this->intercambio->estado = 'aceptado';
+        \Log::info('Aceptando intercambio', ['intercambio_id' => $this->intercambio->intercambio_id]);
+        $this->intercambio->estado = 'pendiente';
         $this->intercambio->save();
         session()->flash('success', 'Intercambio aceptado con éxito.');
+        return redirect()->route('intercambios.index'); // Redirigir para actualizar la lista
     }
 
     public function complete() {
+        \Log::info('Completando intercambio', ['intercambio_id' => $this->intercambio->intercambio_id]);
         $this->intercambio->estado = 'completado';
         $this->intercambio->save();
         session()->flash('success', 'Intercambio marcado como completado.');
+        return redirect()->route('intercambios.index'); // Redirigir para actualizar la lista
     }
 
     public function render() {

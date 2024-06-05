@@ -1,7 +1,7 @@
 <div class="card-wrapper">
     <a href="{{ route('explore.book', $libro_id) }}">
         <article class="card">
-            <picture>
+            <picture class="{{ $esPropio ? 'blur' : '' }}">
                 <img src="{{ $foto_url }}" alt="">
             </picture>
             <div>
@@ -10,17 +10,17 @@
             </div>
         </article>
     </a>
-    <button class="btn-inter" wire:click="añadirIntercambio">
-        <i class="">Intercambiar</i>
-    </button>
+    @if(!$esPropio)
+        <button class="btn-inter" wire:click="añadirIntercambio">
+            <i class="">Intercambiar</i>
+        </button>
+    @endif
     <button wire:click="toggleFavorito" class="favorito-btn">
         <i class="fa fa-heart{{ $esFavorito ? '' : '-o' }}"></i>
     </button>
 
     <style>
         .card-wrapper {
-            {{--  border: 1px solid #ccc;
-            border-radius: 10px 10px 0 0;  --}}
             position: relative;
             display: inline-block;
             margin: 10px;
@@ -35,7 +35,7 @@
             font-size: 0.8rem;
             padding: 0;
             cursor: pointer;
-            position: relative; /* Esto asegura que el botón se posicione dentro del card */
+            position: relative;
         }
 
         .card picture {
@@ -48,7 +48,7 @@
         .card img {
             overflow: hidden;
             width: 100%;
-            aspect-ratio: 1/1;
+            height: 100%;
             object-fit: cover;
             transition: all 250ms ease;
         }
@@ -74,7 +74,7 @@
             border: none;
             cursor: pointer;
             font-size: 24px;
-            color: #e74c3c; /* Color del corazón */
+            color: #e74c3c;
             position: absolute;
             top: 10px;
             right: 10px;
@@ -84,7 +84,7 @@
         }
 
         .favorito-btn .fa-heart-o {
-            color: #bdc3c7; /* Color del corazón vacío */
+            color: #bdc3c7;
         }
         .btn-inter {
             width: fit-content;
@@ -112,8 +112,11 @@
                 color: rgb(255, 255, 255);
             }
         }
+
+        .blur img {
+            filter: blur(1px);
+        }
     </style>
 
-    <!-- Importar Iconos Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </div>
