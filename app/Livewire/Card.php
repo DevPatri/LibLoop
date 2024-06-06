@@ -5,11 +5,13 @@ namespace App\Livewire;
 use App\Constants\IntercambioStatus;
 use App\Models\Intercambio;
 use App\Models\Libro;
+use App\Models\Usuario;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use App\Traits\EsPropioTrait; 
+use App\Traits\EsPropioTrait;
 
-class Card extends Component {
+class Card extends Component
+{
 
     use EsPropioTrait;
 
@@ -19,9 +21,12 @@ class Card extends Component {
     public $libro_id;
     public $esFavorito;
     public $esIntercambio;
+    public $dueño;
+    public $ubicacion;
 
     // Método para inicializar el componente
-    public function mount($libro_id, $foto_url, $titulo, $autor) {
+    public function mount($libro_id, $foto_url, $titulo, $autor)
+    {
         $this->libro_id = $libro_id;
         $this->foto_url = $foto_url;
         $this->titulo = $titulo;
@@ -29,15 +34,23 @@ class Card extends Component {
         $this->esFavorito = Auth::check() && Auth::user()->librosFavoritos()->where('favoritos.libro_id', $libro_id)->exists();
         $this->esIntercambio = Auth::check() && Auth::user()->intercambiosSolicitados()->where('intercambios.libro_id', $libro_id)->exists();
         $this->verificarPropiedad($libro_id);  // Usamos el trait para verificar si es propio
+
+        //buscamos el dueño del libro
+        $dueño_id = Libro::find($libro_id)->usuario_id;
+        $this->dueño = Usuario::find($dueño_id)->nombre;
+        $this->ubicacion = Usuario::find($dueño_id)->ubicacion;
     }
 
     // Método para renderizar la vista
-    public function render() {
+    public function render()
+    {
         return view('livewire.card', [
             'libro_id' => $this->libro_id,
             'foto_url' => $this->foto_url,
             'titulo' => $this->titulo,
             'autor' => $this->autor,
+            'dueño' => $this->dueño,
+            'ubicacion' => $this->ubicacion,
             'esFavorito' => $this->esFavorito,
             'esIntercambio' => $this->esIntercambio,
             'esPropio' => $this->esPropio,
@@ -45,13 +58,15 @@ class Card extends Component {
     }
 
     // Método para mostrar los 3 primeros libros en la lista de inicio/home
-    public function takeBooks() {
-        $books = Libro::take(3)->get();
+    public function takeBooks()
+    {
+        $books = Libro::take(4)->get();
         return $books;
     }
 
     // Método para añadir un libro a la lista de favoritos
-    public function toggleFavorito() {
+    public function toggleFavorito()
+    {
         if (!Auth::check()) {
             return redirect('register.form')->with('error', 'Ups! Necesitas registrarte.');
         }
@@ -62,7 +77,8 @@ class Card extends Component {
     }
 
     // Método para añadir un libro a la lista de intercambios
-    public function añadirIntercambio() {
+    public function añadirIntercambio()
+    {
         if (!Auth::check()) {
             return redirect('register.form')->with('error', 'Ups! Necesitas registrarte.');
         }
@@ -98,9 +114,8 @@ class Card extends Component {
         $this->esIntercambio = true;
 
         session()->flash('success', 'Intercambio solicitado con éxito.');
-        \Log::info('Intercambio creado', ['intercambio' => $intercambio]);
+        // \Log::info('Intercambio creado', ['intercambio' => $intercambio]);
 
         return redirect()->route('intercambios.index');
     }
-
 }

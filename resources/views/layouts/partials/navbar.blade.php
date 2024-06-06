@@ -7,16 +7,20 @@
             <span class="libloop">LibLoop</span>
         </div>
         <div class="links">
+            
             <a href="{{ route('index') }}">Inicio</a>
+
             <a href="{{ route('explore') }}">Libros</a>
+
             <a href="#">Contacto</a>
+
             <div class = "user">
                 @if (Auth::check())
                 <a href="{{ route('dashboard') }}" class="user-link">{{ Auth::user()->nombre }}</a>
             @else
                 <a href="{{ route('login') }}">Iniciar sesión</a>
             @endif
-            </div>  
+            </div>
         </div>
     </nav>
 </header>
@@ -27,7 +31,8 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding-top: 0.5em;
+        {{--  padding-top: 0.5em;  --}}
+        padding-right: 1em;
     }
 
     .logo-container {
@@ -63,7 +68,7 @@
 
     .links a:hover {
         color: #BC4749; /* Efecto de zoom */
-        transform: scale(1.1); 
+        transform: scale(1.1);
     }
 
     .user-link {

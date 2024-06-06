@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Intercambios Completados -->
             <div class="bg-white p-4 rounded shadow">
                 <h2 class="font-semibold text-lg text-gray-800 leading-tight py-5">
@@ -71,7 +71,7 @@
             </div>
 
         </div>
-        
+
     </div>
     <style>
         .contain {
@@ -90,12 +90,12 @@
             background-color: #ccc;
         }
         .col {
-            padding: 0 10px; 
+            padding: 0 10px;
         }
         .overflow-x-auto {
             display: flex;
             overflow-x: auto;
-            margin: 0 20px; 
+            margin: 0 20px;
         }
         .whitespace-nowrap {
             white-space: nowrap;

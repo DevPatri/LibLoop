@@ -1,4 +1,5 @@
 <div class="card-wrapper">
+    {{--  Info del libro  --}}
     <a href="{{ route('explore.book', $libro_id) }}">
         <article class="card">
             <picture class="{{ $esPropio ? 'blur' : '' }}">
@@ -7,9 +8,14 @@
             <div class="card-content">
                 <h3>{{ $titulo }}</h3>
                 <p>{{ $autor }}</p>
+                <p>Usuario: {{ $dueño }}</p>
+                <p>Ubicaci&oacute;n: {{ $ubicacion }}</p>
+
             </div>
         </article>
     </a>
+
+    {{--  Botón de intercambio  --}}
     <div class="action-buttons">
         @if(!$esPropio)
             <button class="btn-inter" wire:click="añadirIntercambio">
@@ -21,6 +27,8 @@
             </a>
         @endif
     </div>
+
+    {{--  Botón de favorito  --}}
     <button wire:click="toggleFavorito" class="favorito-btn">
         <i class="fa fa-heart{{ $esFavorito ? '' : '-o' }}"></i>
     </button>
@@ -37,9 +45,7 @@
             width: 250px;       /* Ancho fijo */
             height: 320px;      /* Altura fija */
         }
-        .card-wrapper.blur {
-            filter: blur(0.9px);
-        }
+
         .card-wrapper a {
             text-decoration: none;
             color: inherit;
@@ -53,6 +59,7 @@
             position: relative;
             width: 100%;
             height: 100%;
+
         }
         .card picture {
             width: 100%;
@@ -73,19 +80,24 @@
             align-items: flex-start;
             padding: 10px;
             flex-grow: 1;
+
+            >p:nth-of-type(2) {
+                margin-top: 10px;
+            }
         }
         .card h3 {
             line-height: 1.4em;
             text-align: left;
             padding: 0 10px;
             font-size: 0.9rem;
+
         }
         .card p {
             line-height: 1.4em;
             text-align: left;
             padding: 0 10px;
             font-size: 0.7rem;
-            margin-top: -10px; /* Eliminar espacio entre título y autor */
+            {{--  margin-top: -10px; /* Eliminar espacio entre título y autor. SE QUEDAN PEGADOS, POR ESO LO QUITO*/  --}}
         }
         .card:hover img {
             transform: scale(1.1);
@@ -136,7 +148,7 @@
             color: #bdc3c7;
         }
         .blur img {
-            filter: blur(1px);
+            {{--  filter: blur(1px); PARECE QUE NO HACE FALTA ESPECIFICAR ESTO --}}
         }
     </style>
 

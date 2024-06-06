@@ -10,13 +10,18 @@
             </picture>
         </div>
         <section>
-            <h1>{{ $libro->titulo }}</h1>
-            <p><strong>Autor: </strong>{{ $libro->autor }}</p>
-            <p><strong>Género: </strong>{{ $libro->genero }}</p>
-            <p><strong>Estado: </strong>{{ $libro->estado }}</p>
-            <p><strong>Usuario: </strong>{{ $libro->usuario_id }}</p>
+            <div>
+                <h1>{{ $libro->titulo }}</h1>
+                <p><strong>Autor: </strong>{{ $libro->autor }}</p>
+                <p><strong>Género: </strong>{{ $libro->genero }}</p>
+                <p><strong>Estado: </strong>{{ $libro->estado }}</p>
+                <h3><strong>Usuario</strong></h3>
+                <p><strong>Nombre: </strong>{{ $usuario }}</p>
+                <p><strong>Ubicaci&oacute;n: </strong>{{ $ubicacion }}</p>
+            </div>
+
             <div class="btn-container">
-                @if(!$esPropio)
+                @if (!$esPropio)
                     <form action="{{ route('intercambios.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="libro_id" value="{{ $libro->libro_id }}">
@@ -38,25 +43,47 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 20px;
                 padding: 20px;
+
             }
+
             .container_book img {
                 border-radius: 10px;
                 width: 100%;
             }
+
             .container_book section {
-                padding: 0 15%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 0 20px;
                 text-align: left;
             }
+
+            .container_book h1 {
+                font-size: 1.5rem;
+                margin: 0.8em 0;
+            }
+
+            .container_book h3 {
+                font-size: 1rem;
+                margin: 1.7em 0 0 0;
+            }
+
             .container_book h1,
-            .container_book p {
+            .container_book p,
+            .container_book h3 {
                 text-align: left;
             }
+
             .btn-container {
                 display: flex;
                 gap: 10px;
-                justify-content: space-between;
-                margin-top: 20px;
+                justify-content: flex-end;
+                margin-bottom: 20px;
             }
+
             .btn-secondary {
                 width: fit-content;
                 padding: 5px 10px;
@@ -69,10 +96,12 @@
                 background-color: rgba(255, 255, 255, 0.7);
                 box-sizing: border-box;
             }
+
             .btn-secondary:hover {
                 color: rgb(255, 255, 255);
                 background-color: rgb(168, 196, 173);
             }
+
             .btn-secondary:active {
                 background-color: rgb(110, 163, 119);
                 color: rgb(255, 255, 255);
@@ -82,8 +111,9 @@
                 .container_book {
                     grid-template-columns: 1fr;
                 }
+
                 .container_book section {
-                    padding: 0;
+                    padding: 0 20px;
                 }
             }
         </style>

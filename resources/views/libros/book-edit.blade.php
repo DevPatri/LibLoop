@@ -63,8 +63,8 @@
 
 <style>
     .container-fluid {
-        padding: 0;
-        margin: 0;
+        {{--  padding: 0;  --}}
+        {{--  margin: 0;  --}}
     }
 
     .login-background {
