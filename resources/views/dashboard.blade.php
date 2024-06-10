@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-6 h-screen contain">
+    <div class="pt-28 bg-fixed min-h-screen contain">
         <div class="flex flex-col lg:flex-row flex-wrap items-center justify-center">
             <!-- Solicitudes de Intercambio -->
             <div class="max-w-2xl w-full mx-auto sm:px-4 sm:m-3">

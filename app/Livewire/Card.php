@@ -60,7 +60,7 @@ class Card extends Component
     // Método para mostrar los 3 primeros libros en la lista de inicio/home
     public function takeBooks()
     {
-        $books = Libro::take(4)->get();
+        $books = Libro::take(5)->get();
         return $books;
     }
 

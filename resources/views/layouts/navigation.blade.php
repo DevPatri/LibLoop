@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 fixed top-0 z-50 w-full shadow-md">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
@@ -25,6 +25,9 @@
                     </a>
                     <a href="{{ route('intercambios.index') }}" class="custom-nav-link {{ request()->routeIs('intercambios.index') ? 'active' : '' }}">
                         {{ __('Intercambios') }}
+                    </a>
+                    <a href="{{ route('mensajes.index') }}" class="custom-nav-link {{ request()->routeIs('mensajes.index') ? 'active' : '' }}">
+                        {{ __('Mensajes') }}
                     </a>
                 </div>
             </div>

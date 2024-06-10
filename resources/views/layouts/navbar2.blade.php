@@ -53,6 +53,9 @@
                             <x-dropdown-link :href="route('dashboard')" class="custom-nav-link">
                                 {{ __('Panel de usuario') }}
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('mensajes.index')" class="custom-nav-link">
+                                {{ __('Mensajes') }}
+                            </x-dropdown-link>
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="py-10 h-screen items-center justify-center contain flex-col text-center">
+    <div class="bg-fixed pt-20 min-h-screen items-center justify-center contain flex-col text-center">
         <h1 class="font-semibold text-xl text-gray-800 leading-tight py-5">
             {{ __('Libros de ' . Auth::user()->nombre) }}
         </h1>

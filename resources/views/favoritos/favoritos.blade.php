@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="py-10 h-screen items-center justify-center contain flex-col text-center">
+    <div class="pt-28 bg-fixed h-screen items-center justify-center contain flex-col text-center">
         <x-slot name="header">
             <h1 class="font-semibold text-xl text-white leading-tight py-5">
                 {{ __('Mis Favoritos') }}

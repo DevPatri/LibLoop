@@ -84,7 +84,6 @@ class UsuarioController extends Controller {
         $intercambios = $usuario->intercambiosPropios()->orWhere('solicitante_id', $usuario->id)->with('libro')->get();
         return view('intercambios.intercambios', compact('intercambios'));
     }
-
     // // Método para mostrar todos los usuarios (la info de Usuario)
     // public function index() {
     //     $usuarios = Usuario::all();                          // Obtiene todos los usuarios

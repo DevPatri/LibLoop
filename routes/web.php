@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Card;
 
+use App\Livewire\Card;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\IntercambioController;
+use App\Http\Controllers\MensajeController;
 
 
 /* A U T E N T I F I C A C I Ó N */
@@ -43,11 +44,12 @@ Route::get('/explore/book/{libro_id}', [LibroController::class, 'show'])->name('
 // 5. Ruta de usuario protegidas (dashboard del usuario autenticado)
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', [LibroController::class, 'getDashboardData'])->name('dashboard');                                                       // Ruta para mostrar el dashboard
-    Route::get('/dashboard/create', [LibroController::class, 'create'])->name('dashboard.create');                                                  // Ruta para mostrar el formulario de creación
-    Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');                                                   // Ruta para crear un libro
-    Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');                                         // Ruta para mostrar los libros del usuario
-    Route::get('/dashboard/favoritos', [UsuarioController::class, 'favoritos'])->name('favoritos.index');                                        // Ruta para mostrar los libros favoritos
+    Route::get('/dashboard', [LibroController::class, 'getDashboardData'])->name('dashboard');                                                        // Ruta para mostrar el dashboard
+    Route::get('/dashboard/create', [LibroController::class, 'create'])->name('dashboard.create');                                                   // Ruta para mostrar el formulario de creación
+    Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');                                                    // Ruta para crear un libro
+    Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');                                          // Ruta para mostrar los libros del usuario
+    Route::get('/dashboard/favoritos', [UsuarioController::class, 'favoritos'])->name('favoritos.index');                                         // Ruta para mostrar los libros favoritos
+    Route::get('/dashboard/mensajes', [MensajeController::class, 'showReceived'])->name('mensajes.index');                                       // Ruta para mostrar los mensajes
 
     Route::get('/dashboard/intercambios', [IntercambioController::class, 'index'])->name('intercambios.index');                                // Ruta para mostrar los intercambios
     Route::post('/intercambios', [IntercambioController::class, 'store'])->name('intercambios.store');                                        // Ruta para solicitar un intercambio

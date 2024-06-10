@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="py-10 min-h-screen items-center justify-center contain flex-col text-center">
+    <div class="min-h-screen pt-28 pb-10 bg-fixed items-center justify-center contain flex-col text-center">
 
         <x-slot name="header">
             <h1 class="font-semibold text-xl text-white leading-tight py-5">
