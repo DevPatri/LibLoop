@@ -37,7 +37,7 @@
 
             <!-- Contenedor del formulario -->
             <div class="form-container">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register.store') }}">
                     @csrf
 
                     <div class="form-header">
