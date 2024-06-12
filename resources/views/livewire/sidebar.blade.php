@@ -1,6 +1,6 @@
 <div>
-    <nav class = "side">
-        <h3>Filtros</h3>
+    <nav class="side">
+        <h3 class = "mt-6">Filtros</h3>
         <div>
             <select class="filter" name="gender" wire:model="gender" wire:change="filterByGender($event.target.value)">
                 <option value="" selected hidden>G&eacute;neros</option>
@@ -21,26 +21,63 @@
             </select>
         </div>
         <div class="search">
-            <h3>Buscar</h3>
+            <h3 class = "mt-6">Buscar</h3>
             <input type="text" wire:model.lazy="search" wire:change="searchLibros"
                 placeholder="T&iacute;tulo o autor">
         </div>
     </nav>
     <style>
-        .filter {
-            width: 10em;
-            margin-bottom: 10px;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+        .filter, .search input {
+            width: 200px;
+            height: 40px;
+            background-color: white;
+            color: #87a28b; /* Verde clarito */
+            margin: 10px 0;
+            font-size: 12px;
+            letter-spacing: 1px;
+            font-weight: 500;
+            text-transform: uppercase;
+            border: 2px solid rgba(168, 196, 173, 0.7); /* Verde clarito */
             border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            outline: none;
+            cursor: pointer;
+            font-family: Verdana, sans-serif;
         }
-        .search input{
-            border-radius: 5px;
+
+        h3 {
+            font-family: Verdana, sans-serif;
+            text-transform: uppercase;
+            color: #698e6e;
+        }
+        .filter option {
+            text-transform: none;
+        }
+
+        .filter:hover, .search input:hover {
+            border-color: rgba(44, 77, 50, 1); /* Verde oscuro */
+            box-shadow: 0 4px 8px rgba(44, 77, 50, 0.3);
+        }
+
+        .filter:focus, .search input:focus {
+            border-color: rgba(44, 77, 50, 1); /* Verde oscuro */
+            box-shadow: 0 4px 8px rgba(44, 77, 50, 0.5);
+        }
+
+        .search input::placeholder {
+            color: #87a28b; /* Verde clarito */
+            text-transform: uppercase;
+            font-weight: 500;
         }
 
         .side {
             display: flex;
             flex-direction: column;
             margin-top: 10px;
-            /* Mirar que coincida con mt de explore-libros.blade.php */
         }
 
         @media (max-width: 830px) {
@@ -55,12 +92,12 @@
                     align-items: center;
                     gap: 5px;
                     margin: 0 10px;
-                    .filter {
-                        margin-bottom: 0;
-                    }
+                }
+
+                .filter {
+                    margin-bottom: 0;
                 }
             }
-        }
         }
     </style>
 </div>

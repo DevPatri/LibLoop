@@ -3,33 +3,45 @@
 @section('title', 'LibLoop')
 
 @section('content')
-    <main>
-        <div class="banner">
-            <div class="banner-overlay"></div>
-            <p class="text">Un libro cerrado no abre mentes, intercambia y descubre.</p>
-            <div class="banner-bt">
-                <a class="btn-1" href="{{ route('register.form') }}">Regístrate</a>
-                <a class="btn-1" href="{{ route('login') }}">Inicia sesión</a>
-            </div>
+<main>
+    <div class="banner">
+        <div class="banner-overlay"></div>
+        <p class="text">Un libro cerrado no abre mentes, intercambia y descubre.</p>
+        <div class="banner-bt">
+            <a class="btn-1" href="{{ route('register.form') }}">Regístrate</a>
+            <a class="btn-1" href="{{ route('login') }}">Inicia sesión</a>
         </div>
-        <section>
-            <div class="card card-bt">
-                <a class="button" href="#">Novedades</a>
-                <a class="button" href="#">Más populares</a>
-                <a class="button" href="#">Géneros</a>
-                <a class="button" href="{{ route('explore') }}">Explora</a>
-            </div>
-            {{-- mostramos 4 libros para la portada --}}
-            @foreach ($books as $book)
-                @livewire('card', [
-                    'foto_url' => $book->foto_url,
-                    'titulo' => $book->titulo,
-                    'autor' => $book->autor,
-                    'libro_id' => $book->libro_id,
-                ])
-            @endforeach
-        </section>
-    </main>
+    </div>
+    <section>
+        <div class="card card-bt buttons">
+            <a class="button" href="{{ route('explore') }}">
+                <span></span>
+                <p data-title="Novedades" data-text="Novedades"></p>
+            </a>
+            <a class="button" href="{{ route('explore') }}">
+                <span></span>
+                <p data-title="Más populares" data-text="Más populares"></p>
+            </a>
+            <a class="button" href="{{ route('explore') }}">
+                <span></span>
+                <p data-title="Géneros" data-text="Géneros"></p>
+            </a>
+            <a class="button" href="{{ route('explore') }}">
+                <span></span>
+                <p data-title="Explora" data-text="Explora"></p>
+            </a>
+        </div>
+        {{-- mostramos 4 libros para la portada --}}
+        @foreach ($books as $book)
+            @livewire('card', [
+                'foto_url' => $book->foto_url,
+                'titulo' => $book->titulo,
+                'autor' => $book->autor,
+                'libro_id' => $book->libro_id,
+            ])
+        @endforeach
+    </section>
+</main>
 @endsection
 
 {{-- CSS --}}
@@ -92,7 +104,6 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-
         gap: 20px;
         width: 70%;
     }
@@ -157,43 +168,137 @@
         align-items: center;
         flex-wrap: nowrap;
         height: 35px;
-
-        .button {
-            height: 30px;
-        }
     }
 
-    .card-bt a {
-        width: 70%;
-        height: 10px;
-        border: none;
-        border-radius: 10px;
-        color: #386641;
-        font-size: 1.3rem;
+    .button {
+        width: 200px;
+        height: 60px;
+        background-color: white;
+        margin: 12px;
+        color: rgba(56, 102, 65, 0.7); 
+        position: relative;
+        overflow: hidden;
+        font-size: 16px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
         cursor: pointer;
-        line-height: 30px;
-        background-color: rgb(255, 255, 255);
-        border: 1px solid rgb(86, 86, 86);
-        transition: all 0.5s ease-in-out;
-        text-decoration: none;
+        border: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .card-bt a:hover {
-        color: rgb(255, 255, 255);
-        background-image: linear-gradient(135deg, rgb(168, 196, 173) 75%, rgb(110, 163, 119) 75% 100%);
-        border: none;
+    .button:before,
+    .button:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background-color: rgba(168, 196, 173, 0.7); 
+        transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
     }
 
-    .card-bt a:active {
-        background-image: linear-gradient(135deg, rgb(168, 196, 173) 0%, rgb(110, 163, 119) 0% 100%);
-        color: rgb(255, 255, 255);
+    .button:before {
+        right: 0;
+        top: 0;
+        transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+    }
+
+    .button:after {
+        left: 0;
+        bottom: 0;
+    }
+
+    .button span {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        z-index: 1;
+    }
+
+    .button span:before,
+    .button span:after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 0;
+        background-color: rgba(168, 196, 173, 0.7); 
+        transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+    }
+
+    .button span:before {
+        right: 0;
+        top: 0;
+        transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+    }
+
+    .button span:after {
+        left: 0;
+        bottom: 0;
+    }
+
+    .button p {
+        padding: 0;
+        margin: 0;
+        transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .button p:before,
+    .button p:after {
+        position: absolute;
+        width: 100%;
+        transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+        z-index: 1;
+        left: 0;
+    }
+
+    .button p:before {
+        content: attr(data-title);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .button p:after {
+        content: attr(data-text);
+        top: 150%;
+        color: rgba(168, 196, 173, 0.7); 
+    }
+
+    .button:hover:before,
+    .button:hover:after {
+        width: 100%;
+    }
+
+    .button:hover span:before,
+    .button:hover span:after {
+        height: 100%;
+    }
+
+    .button:hover p:before {
+        top: -50%;
+        transform: rotate(5deg);
+    }
+
+    .button:hover p:after {
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     @media (max-width: 650px) {
         .card-bt {
             display: flex;
             flex-direction: row;
-            {{--  flex-wrap: wrap;  --}} {{--  height: 100px;  --}}
         }
 
         .card-bt a {
