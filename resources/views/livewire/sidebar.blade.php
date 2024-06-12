@@ -59,12 +59,12 @@
         }
 
         .filter:hover, .search input:hover {
-            border-color: rgba(44, 77, 50, 1); /* Verde oscuro */
-            box-shadow: 0 4px 8px rgba(44, 77, 50, 0.3);
+            border-color: rgba(82, 122, 89, 0.7);
+            box-shadow: 0 4px 8px rgba(82, 122, 89, 0.7); 
         }
 
         .filter:focus, .search input:focus {
-            border-color: rgba(44, 77, 50, 1); /* Verde oscuro */
+            border-color: rgba(82, 122, 89, 0.7); 
             box-shadow: 0 4px 8px rgba(44, 77, 50, 0.5);
         }
 
