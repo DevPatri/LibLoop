@@ -11,8 +11,7 @@
             </select>
         </div>
         <div>
-            <select class="filter" name="ubicacion" wire:model.debounce.500ms="ubicacion"
-                wire:change="filterByUbicacion($event.target.value)">
+            <select class="filter" name="ubicacion" wire:model.debounce.500ms="ubicacion" wire:change="filterByUbicacion($event.target.value)">
                 <option value="" selected hidden>Ubicaci&oacute;n</option>
                 <option value="Todos">Todos</option>
                 @foreach ($ubicaciones as $ubicacion)

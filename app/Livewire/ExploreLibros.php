@@ -45,18 +45,13 @@ class ExploreLibros extends Component
     #[On('filterByUbicacion')]
     public function handleFilterByUbicacion($ubicacion)
     {
-        if ($ubicacion == 'Todos' || $ubicacion == '') {
+        if ($ubicacion === 'Todos' || $ubicacion === '') {
             $this->libros = Libro::all();
-        } else {
-
+            } else {
             $this->libros = Libro::whereHas('usuario', function ($query) use ($ubicacion) {
                 $query->where('ubicacion', $ubicacion);
-            })->get(); //! Query mal hecha
+            })->get();
         }
-        $prueba = $this->libros = Libro::whereHas('usuario', function ($query) use ($ubicacion) {
-            $query->where('ubicacion', $ubicacion);
-        })->get();
-        // dd($prueba);
     }
 
     public function render()

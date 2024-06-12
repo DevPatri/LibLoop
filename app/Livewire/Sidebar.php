@@ -44,9 +44,9 @@ class Sidebar extends Component
     //* end filter
 
     //* Filtrar con select la ubicación a mostrar.
-    public function filterByUbicacion()
+    public function filterByUbicacion($ubicacion)
     {
-
+        $this->ubicacion = $ubicacion;
         $this->dispatch('filterByUbicacion', $this->ubicacion);
     }
     //* end filter
