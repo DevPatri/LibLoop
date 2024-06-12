@@ -22,6 +22,8 @@
 
             <div class="btn-container">
                 @if (!$esPropio)
+
+                    <a class="btn-secondary" href="{{ route('mensajes.index', ['usuarioId' => $libro->usuario_id ])}}">Enviar mensaje</a>
                     <form action="{{ route('intercambios.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="libro_id" value="{{ $libro->libro_id }}">
@@ -30,7 +32,7 @@
                         <button type="submit" class="btn-secondary">Intercambiar</button>
                     </form>
                 @else
-                    <a href="{{ route('libros.edit', $libro->libro_id) }}" class="btn-secondary">Editar</a>
+                    <a href="{{ route('libros.edit', ['libro' => $libro->libro_id]) }}" class="btn-secondary">Editar</a>
                 @endif
                 <a class="btn-secondary" href="{{ route('explore') }}">volver</a>
             </div>
@@ -41,35 +43,41 @@
                 width: 80%;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
+                align-items: center;
                 gap: 20px;
                 padding: 20px;
 
+                img {
+                    border-radius: 10px;
+                    {{--  width: 100%;  --}}
+                    max-height: 600px;
+                }
+
+                section {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    padding: 50px 20px;
+                    text-align: left;
+                    height: fit-content;
+
+                }
+                h1 {
+                    font-size: 1.5rem;
+                    margin: 0.8em 0;
+                }
+                h3 {
+                    font-size: 1rem;
+                    margin: 1.7em 0 0 0;
+                }
+                >div:first-of-type{
+                    margin: 0 auto;
+                }
             }
 
-            .container_book img {
-                border-radius: 10px;
-                width: 100%;
-            }
 
-            .container_book section {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 0 20px;
-                text-align: left;
-            }
-
-            .container_book h1 {
-                font-size: 1.5rem;
-                margin: 0.8em 0;
-            }
-
-            .container_book h3 {
-                font-size: 1rem;
-                margin: 1.7em 0 0 0;
-            }
 
             .container_book h1,
             .container_book p,
@@ -81,7 +89,7 @@
                 display: flex;
                 gap: 10px;
                 justify-content: flex-end;
-                margin-bottom: 20px;
+                margin: 20px 0;
             }
 
             .btn-secondary {

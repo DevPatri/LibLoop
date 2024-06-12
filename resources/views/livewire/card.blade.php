@@ -2,7 +2,7 @@
     <a href="{{ route('explore.book', $libro_id) }}">
         <article class="card">
             <picture>
-                <img src="{{ $foto_url }}" alt="">
+                <img src="{{ $foto_url }}" alt="{{ $titulo }}">
                 {{-- Botón de favorito --}}
                 <button wire:click.prevent="toggleFavorito" class="favorito-btn">
                     <i class="fa fa-heart{{ $esFavorito ? '' : '-o' }}"></i>
@@ -42,10 +42,10 @@
             overflow: hidden;
             width: 250px;        /* Ancho fijo */
             height: 350px;      /* Altura fija */
-            font-family: Verdana, sans-serif; 
+            font-family: Verdana, sans-serif;
         }
         .card-wrapper *{
-            font-family: Verdana, sans-serif; 
+            font-family: Verdana, sans-serif;
         }
         .card-wrapper.blur {
             filter: blur(0.9px);
@@ -112,12 +112,12 @@
             margin: 5px 0;
             display: flex;
             justify-content: flex-end;
-            align-items: center; 
+            align-items: center;
             color: #2b2b2b
         }
         .right-info p i {
             margin-left: 5px;
-            vertical-align: middle; 
+            vertical-align: middle;
         }
         .card:hover img {
             transform: scale(1.1);
@@ -172,7 +172,7 @@
             filter: blur(1px);
         }
         .ubicacion-icon {
-            color: #e74c3c; 
+            color: #e74c3c;
         }
     </style>
 

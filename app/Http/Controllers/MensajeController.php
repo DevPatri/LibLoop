@@ -24,10 +24,9 @@ class MensajeController extends Controller {
         return back()->with('success', 'Mensaje enviado correctamente.');
     }
 
-    // Muestra los mensajes recibidos por un usuario
-    public function showReceived() {
-
-        return view('mensajes.index');
+    // pasa el id del usuario al componente de mensajes
+    public function recibeId($usuarioId = null) {
+        return view('mensajes.index', ['usuarioId' => $usuarioId]);
     }
 
 }

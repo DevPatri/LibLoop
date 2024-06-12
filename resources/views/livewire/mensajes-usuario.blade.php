@@ -43,7 +43,8 @@
         @if($mensajes)
         <div class="flex flex-row justify-center p-2 m-4 text-white w-full">
             <form class="w-full" wire:submit.prevent="updateMessages">
-                <input type="text" wire:model="nuevoMensaje" class="flex-grow h-10 w-4/6 rounded border-0 self-center text-gray-800"/>
+                @csrf
+                <input type="text" wire:model="nuevoMensaje" class="flex-grow h-10 w-4/6 rounded border-0 self-center text-gray-800" placeholder="Escribe un mensaje..."/>
                 <button class="text-gray-800 px-6 py-2 w-1/6 bg-teal-50 m-4 rounded">Enviar</button>
             </form>
         </div>
