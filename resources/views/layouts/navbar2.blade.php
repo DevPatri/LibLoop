@@ -69,6 +69,12 @@
                             </form>
                         </x-slot>
                     </x-dropdown>
+                @else
+                    <x-dropdown-link :href="route('login')" class="custom-nav-link mr-4">
+                        {{--  <a href="{{ route('login') }}"
+                        class="custom-nav-link {{ request()->routeIs('login') ? 'active' : '' }}">  --}}
+                        {{ __('Inicia sesión') }}
+                    </x-dropdown-link>
                 @endif
 
             </div>

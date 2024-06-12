@@ -8,21 +8,45 @@ use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 
-
 class MensajesUsuario extends Component
 {
 
     public $usuarios;
     public $mensajes;
-    public $nuevoMensaje;
+    public $nuevoMensaje = '';
     public $usuarioSeleccionado;
 
-    public function mount()
+    public function mount($usuarioId = null)
     {
-        $usuarios = $this->userFromMessages();
-        $this->usuarios = $usuarios;
+        $this->usuarios = $this->userFromMessages();
+
+        //si se ha cargado el componente con un usuario, mostrar sus mensajes
+        if ($usuarioId) {
+            $usuarioNuevo = Usuario::find($usuarioId);
+            //dd($usuarioNuevo->usuario_id);                   //Esto pasa el id correctamente y es solo un objeto, no dos
+            foreach ($this->usuarios as $usuario2) {
+
+                if ($usuario2->usuario_id == $usuarioNuevo->usuario_id) {
+                    // $this->usuarioSeleccionado = $usuarioNuevo;
+                    $this->showMessages($usuarioNuevo);
+                    // dd($this->usuarioSeleccionado);
+                    return;
+                }
+            }
+            $this->usuarios->push($usuarioNuevo);
+            // $this->usuarioSeleccionado = $usuarioNuevo;
+            $this->showMessages($usuarioNuevo);
+            // dd($this->usuarioSeleccionado);
+        }
     }
 
+    #[On('recargarMensajes')]
+    public function recargarMensajes()
+    {
+        $this->usuarios = $this->userFromMessages();
+    }
+
+    // Muestra todos los usuarios con los que se ha intercambiado mensajes
     public function userFromMessages()
     {
         $usuariosSent = Mensaje::where('remitente_id', Auth::id())->pluck('destinatario_id');
@@ -30,9 +54,13 @@ class MensajesUsuario extends Component
 
         return $usuarios;
     }
+
+    // Muestra los mensajes de un usuario seleccionado
     #[On('selectUsuario')]
     public function showMessages($userId)
     {
+        $this->usuarioSeleccionado = Usuario::find($userId);
+
         $mensajes = Mensaje::where(function ($query) use ($userId) {
             $query->where(function ($query) use ($userId) {
                 $query->where('remitente_id', Auth::id())
@@ -43,30 +71,35 @@ class MensajesUsuario extends Component
             });
         })->orderBy('fecha_hora')->get();
         $this->mensajes = $mensajes;
-        $this->usuarioSeleccionado = Usuario::find($userId);
-        $this->dispatch('refreshComponent');
+        // dd($this->usuarioSeleccionado);
+        // $this->dispatch('refreshComponent');
     }
 
+    // Resetea los mensajes al seleccionar otro usuario
     #[On('deselectUsuario')]
     public function resetMessages()
     {
-        $this->mensajes = [];  // Resetea los mensajes a una colección vacía
+        $this->usuarioSeleccionado = null;
+        $this->mensajes = [];
     }
+
+    // Introduce un nuevo mensaje en la base de datos y lo muestra en la vista
     public function updateMessages()
     {
+        // var_dump($this->usuarioSeleccionado);
         $validated = $this->validate([
             'nuevoMensaje' => 'required'
         ]);
         $nuevoMensaje = new Mensaje();
         $nuevoMensaje->contenido = $validated['nuevoMensaje'];
         $nuevoMensaje->remitente_id = Auth::id();
-        $nuevoMensaje->destinatario_id = $this->usuarioSeleccionado->usuario_id;
+        $nuevoMensaje->destinatario_id = $this->usuarioSeleccionado->first()->usuario_id;
         $nuevoMensaje->fecha_hora = now();
         $nuevoMensaje->save();
-        
+        var_dump($nuevoMensaje);
         $this->mensajes->push($nuevoMensaje);
-        $this->dispatch('refreshComponent');
         $this->nuevoMensaje = '';
+        $this->dispatch('refreshComponent');
     }
     public function render()
     {

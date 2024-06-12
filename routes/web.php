@@ -9,7 +9,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\IntercambioController;
 use App\Http\Controllers\MensajeController;
-
+use App\Livewire\MensajesUsuario;
 
 /* A U T E N T I F I C A C I Ó N */
 
@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/store', [LibroController::class, 'store'])->name('dashboard.store');                                                    // Ruta para crear un libro
     Route::get('/dashboard/user/{id}', [LibroController::class, 'findByUser'])->name('dashboard.userId');                                          // Ruta para mostrar los libros del usuario
     Route::get('/dashboard/favoritos', [UsuarioController::class, 'favoritos'])->name('favoritos.index');                                         // Ruta para mostrar los libros favoritos
-    Route::get('/dashboard/mensajes', [MensajeController::class, 'showReceived'])->name('mensajes.index');                                       // Ruta para mostrar los mensajes
+    Route::get('/dashboard/mensajes/{usuarioId?}', [MensajeController::class, 'recibeId'])->name('mensajes.index');                                       // Ruta para mostrar los mensajes
 
     Route::get('/dashboard/intercambios', [IntercambioController::class, 'index'])->name('intercambios.index');                                // Ruta para mostrar los intercambios
     Route::post('/intercambios', [IntercambioController::class, 'store'])->name('intercambios.store');                                        // Ruta para solicitar un intercambio

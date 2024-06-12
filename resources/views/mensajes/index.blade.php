@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="pt-16 bg-fixed bg-cover bg-center items-center justify-center contain flex-col text-center">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-0 space-y-6">
-                @livewire('mensajes-usuario')
+                @livewire('mensajes-usuario', ['usuarioId' => $usuarioId])
         </div>
 
     </div>
