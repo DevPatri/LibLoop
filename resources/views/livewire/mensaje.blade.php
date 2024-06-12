@@ -5,7 +5,7 @@
             {{ $remitente }}
         </p>
         <h5 class="card-title">{{ $contenido }}</h5>
-        <p class="card-text">{{ $fecha_hora }}</p>
+        <p class="card-text self-end">{{ $fecha_hora }}</p>
     </div>
     <style>
         p {

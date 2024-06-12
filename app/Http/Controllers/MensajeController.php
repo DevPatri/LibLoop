@@ -12,16 +12,18 @@ class MensajeController extends Controller {
     // Envía un mensaje a otro usuario
     public function store(Request $request) {
 
-        $validated = $request->validate([
-            'remitente_id' => 'required|exists:usuarios,id',
-            'destinatario_id' => 'required|exists:usuarios,id',
-            'contenido' => 'required'
-        ]);
+        // $usuarioId = request('usuarioId');
+        // return redirect()->route('mensajes.index', ['usuarioId' => $usuarioId]);
+        // $validated = $request->validate([
+        //     'remitente_id' => 'required|exists:usuarios,id',
+        //     'destinatario_id' => 'required|exists:usuarios,id',
+        //     'contenido' => 'required'
+        // ]);
 
-        $mensaje = new Mensaje($validated);
-        $mensaje->save();
+        // $mensaje = new Mensaje($validated);
+        // $mensaje->save();
 
-        return back()->with('success', 'Mensaje enviado correctamente.');
+        // return back()->with('success', 'Mensaje enviado correctamente.');
     }
 
     // pasa el id del usuario al componente de mensajes

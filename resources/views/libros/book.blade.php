@@ -24,6 +24,7 @@
                 @if (!$esPropio)
 
                     <a class="btn-secondary" href="{{ route('mensajes.index', ['usuarioId' => $libro->usuario_id ])}}">Enviar mensaje</a>
+
                     <form action="{{ route('intercambios.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="libro_id" value="{{ $libro->libro_id }}">
@@ -127,3 +128,4 @@
         </style>
     </div>
 @endsection
+

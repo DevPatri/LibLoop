@@ -31,7 +31,7 @@
             text-align: center;
             box-sizing: border-box;
             padding: 0;
-            
+
         }
 
         body {
