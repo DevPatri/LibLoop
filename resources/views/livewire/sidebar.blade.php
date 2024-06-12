@@ -1,6 +1,6 @@
 <div>
     <nav class="side">
-        <h3 class = "mt-6">Filtros</h3>
+        <h3 class="mt-6">Filtros</h3>
         <div>
             <select class="filter" name="gender" wire:model="gender" wire:change="filterByGender($event.target.value)">
                 <option value="" selected hidden>G&eacute;neros</option>
@@ -21,16 +21,15 @@
             </select>
         </div>
         <div class="search">
-            <h3 class = "mt-6">Buscar</h3>
-            <input type="text" wire:model.lazy="search" wire:change="searchLibros"
-                placeholder="T&iacute;tulo o autor">
+            <h3 class="mt-6">Buscar</h3>
+            <input type="text" wire:model.lazy="search" wire:change="searchLibros" placeholder="T&iacute;tulo o autor">
         </div>
     </nav>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 
-        .filter, .search input {
+        .side .filter, .side .search input {
             width: 200px;
             height: 40px;
             background-color: white;
@@ -49,26 +48,27 @@
             font-family: Verdana, sans-serif;
         }
 
-        h3 {
+        .side h3 {
             font-family: Verdana, sans-serif;
             text-transform: uppercase;
             color: #698e6e;
         }
-        .filter option {
+        
+        .side .filter option {
             text-transform: none;
         }
 
-        .filter:hover, .search input:hover {
-            border-color: rgba(82, 122, 89, 0.7);
-            box-shadow: 0 4px 8px rgba(82, 122, 89, 0.7); 
+        .side .filter:hover, .side .search input:hover {
+            border-color: rgba(82, 122, 89, 0.7); /* Verde un poco más claro */
+            box-shadow: 0 4px 8px rgba(82, 122, 89, 0.7);
         }
 
-        .filter:focus, .search input:focus {
-            border-color: rgba(82, 122, 89, 0.7); 
+        .side .filter:focus, .side .search input:focus {
+            border-color: rgba(82, 122, 89, 0.7);
             box-shadow: 0 4px 8px rgba(44, 77, 50, 0.5);
         }
 
-        .search input::placeholder {
+        .side .search input::placeholder {
             color: #87a28b; /* Verde clarito */
             text-transform: uppercase;
             font-weight: 500;
@@ -94,7 +94,7 @@
                     margin: 0 10px;
                 }
 
-                .filter {
+                .side .filter {
                     margin-bottom: 0;
                 }
             }
