@@ -14,13 +14,14 @@
 @endsection
 
 <style>
-    main{
+    main {
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr 4fr; /* Ajusta el tamaño de las columnas, sidebar a 1/5 y sección a 4/5 */
         gap: 20px;
     }
-    @media (max-width: 830px){
-        main{
+
+    @media (max-width: 830px) {
+        main {
             grid-template-columns: 1fr;
         }
     }
