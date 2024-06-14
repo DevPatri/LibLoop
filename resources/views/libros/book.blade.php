@@ -41,7 +41,7 @@
         <style>
             .container_book {
                 margin: 0 auto;
-                width: 80%;
+                width: 100%;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 align-items: center;
@@ -122,7 +122,7 @@
                 }
 
                 .container_book section {
-                    padding: 0 20px;
+                    {{--  padding: 0 20px;  --}}
                 }
             }
         </style>

@@ -35,7 +35,7 @@
         }
 
         body {
-            max-width: 95%;
+            max-width: 100%;
             padding: 0;
             margin: 0 auto;
         }

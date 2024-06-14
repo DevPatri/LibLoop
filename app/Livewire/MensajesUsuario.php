@@ -19,7 +19,15 @@ class MensajesUsuario extends Component
 
     public function mount($usuarioId = null)
     {
-        $this->usuarios = $this->userFromMessages();
+        $usuarios = Mensaje::where(function ($query) {
+            $query->where('remitente_id', Auth::id())
+                ->orWhere('destinatario_id', Auth::id());
+        })->get()->map(function ($mensaje) {
+            return $mensaje->remitente_id == Auth::id() ? $mensaje->destinatario_id : $mensaje->remitente_id;
+        })->unique();
+        $this->usuarios = Usuario::whereIn('usuario_id', $usuarios)->get();
+        // dd($this->usuarios);
+        // $this->usuarios = $this->userFromMessages();
         if ($usuarioId) {
             $usuarioNuevo = Usuario::find($usuarioId);
             //dd($usuarioNuevo->usuario_id);                   //Esto pasa el id correctamente y es solo un objeto, no dos
@@ -39,7 +47,6 @@ class MensajesUsuario extends Component
             // dd($this->usuarioSeleccionado, $usuarioNuevo);
 
             //si se ha cargado el componente con un usuario, mostrar sus mensajes
-
         }
     }
 
@@ -49,6 +56,12 @@ class MensajesUsuario extends Component
     {
         $this->usuarios = $this->userFromMessages();
     }
+
+    // public function refreshComponent($usuarioSeleccionado){
+    //     dd('hola');
+    //     $this->showMessages($usuarioSeleccionado);
+    //     $this->render();
+    // }
 
     // Muestra todos los usuarios con los que se ha intercambiado mensajes
     public function userFromMessages()

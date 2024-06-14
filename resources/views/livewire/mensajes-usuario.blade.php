@@ -1,8 +1,10 @@
-<div class="grid grid-cols-1fr-2fr gap-3 w-full">
+<div class="grid grid-cols-1fr-2fr gap-3 w-full h-full">
     {{--  parte izquierda con usuarios  --}}
     <div class="border-gray border-r-2 w-full mx-auto">
         {{--  cabecera  --}}
         <h3 class="p-2 m-4 text-white">Usuarios</h3>
+        {{-- Button para refrescar la página --}}
+        <button class="text-gray-800 px-6 py-2 w-3/6 bg-teal-50 m-4 rounded" wire:click="$refresh">Refrescar</button>
         {{--  usuarios  --}}
         @foreach ($usuarios as $usuario)
             {{--  @dump($usuario)  --}}
@@ -17,10 +19,10 @@
         @endforeach
     </div>
     {{--  parte derecha con mensajes  --}}
-    <div class="flex flex-col w-full h-screen">
+    <div class="flex flex-col w-full h-full">
         {{--  cabecera  --}}
         <div class="p-2 m-4 text-white">
-            <h3>Mensajes</h3>
+            <h1>Mensajes</h1>
         </div>
         {{--  mensajes  --}}
         <div class="grid grid-cols-1 w-full">

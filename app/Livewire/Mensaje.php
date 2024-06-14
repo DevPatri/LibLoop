@@ -4,6 +4,9 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Usuario;
+use Livewire\Attributes\On;
+
+
 
 class Mensaje extends Component
 {
@@ -13,7 +16,7 @@ class Mensaje extends Component
     public $destinatario;
     public $remitente_id;
     public $remitente;
-
+    protected $listeners = ['component-name:refresh' => 'refresh'];
 
     public function mount($contenido, $fechaHora, $destinatario_id, $remitente_id)
     {
@@ -22,8 +25,6 @@ class Mensaje extends Component
         $this->destinatario = Usuario::find($destinatario_id)->nombre;
         $this->remitente = Usuario::find($remitente_id)->nombre;
     }
-
-
     public function render()
     {
         return view('livewire.mensaje');
