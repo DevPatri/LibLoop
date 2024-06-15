@@ -18,7 +18,7 @@ class ExploreLibros extends Component
 
     public function mount(): void
     {
-        $this->libros = Libro::all();
+        $this->libros = Libro::where('estado', 'disponible')->get(); // Obtener los libros disponibles desde la base de datos
         $this->generos = Genero::all();      // Obtener los géneros desde la base de datos
         $this->ubicaciones = Usuario::distinct()->pluck('ubicacion');
         $this->selectedGenero = '';         // Inicializar el género seleccionado
@@ -30,16 +30,20 @@ class ExploreLibros extends Component
         if ($gender == 'Todos' || $gender == '') {
             $this->libros = Libro::all();
         } else {
-            $this->libros = Libro::where('genero', $gender)->get();
+            $this->libros = Libro::where('genero', $gender)
+                ->where('estado', 'disponible')
+                ->get();
         }
     }
 
     #[On('search')]
     public function handleSearch($search)
     {
-        $this->libros = Libro::where('titulo', 'like', '%' . $search . '%')
-            ->orWhere('autor', 'like', '%' . $search . '%')
-            ->get();
+        $this->libros = Libro::where(function ($query) use ($search) {
+            $query->where('titulo', 'like', '%' . $search . '%')
+                  ->orWhere('autor', 'like', '%' . $search . '%');
+        })->where('estado', 'disponible')
+          ->get();
     }
 
     #[On('filterByUbicacion')]
@@ -50,7 +54,7 @@ class ExploreLibros extends Component
             } else {
             $this->libros = Libro::whereHas('usuario', function ($query) use ($ubicacion) {
                 $query->where('ubicacion', $ubicacion);
-            })->get();
+            })->where('estado', 'disponible')->get();
         }
     }
 
