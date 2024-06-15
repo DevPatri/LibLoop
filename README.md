@@ -52,4 +52,15 @@ npm install
 
 ## Licencia
 
-Este proyecto tiene una licencia CreativeCommons [CC BY SA](https://creativecommons.org/licenses/by-sa/4.0/deed.es). <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg" width="70" alt="Laravel Logo"></a>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/DevPatri/LibLoop">LibLoop</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/DevPatri/LibLoop">Patricio Egea y Marina Casaus</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+
+<strong>Usted es libre de:</strong>
+
+<strong>Compartir</strong> — copiar y redistribuir el material en cualquier medio o formato para cualquier propósito, incluso comercialmente.
+
+<strong>Adaptar</strong> — remezclar, transformar y construir a partir del material para cualquier propósito, incluso comercialmente.
+La licenciante no puede revocar estas libertades en tanto usted siga los términos de la licencia.
+
+<strong>Bajo los siguientes términos:</strong>
+<strong>Atribución</strong> — Usted debe dar crédito de manera adecuada , brindar un enlace a la licencia, e indicar si se han realizado cambios . Puede hacerlo en cualquier forma razonable, pero no de forma tal que sugiera que usted o su uso tienen el apoyo de la licenciante.
+No hay restricciones adicionales — No puede aplicar términos legales ni medidas tecnológicas que restrinjan legalmente a otras a hacer cualquier uso permitido por la licencia.

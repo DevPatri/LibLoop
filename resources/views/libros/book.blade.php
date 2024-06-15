@@ -53,28 +53,34 @@
                     {{--  width: 100%;  --}}
                     max-height: 600px;
                 }
-
+                picture{
+                    justify-content: end;
+                }
                 section {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     border-radius: 10px;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    padding: 50px 20px;
+                    padding: 25px 30px;
                     text-align: left;
                     height: fit-content;
+                    max-width: 35em;
 
                 }
                 h1 {
                     font-size: 1.5rem;
-                    margin: 0.8em 0;
+                    font-weight: 700;
+                    margin: 0 0 0.4em 0;
                 }
                 h3 {
                     font-size: 1rem;
+                    color:rgb(110, 163, 119);
                     margin: 1.7em 0 0 0;
                 }
                 >div:first-of-type{
-                    margin: 0 auto;
+                    margin-left: auto;
+                    {{--  margin: 0 auto;  --}}
                 }
             }
 
@@ -90,7 +96,7 @@
                 display: flex;
                 gap: 10px;
                 justify-content: flex-end;
-                margin: 20px 0;
+                margin: 10px 0 0 0;
             }
 
             .btn-secondary {
@@ -119,6 +125,7 @@
             @media (max-width: 768px) {
                 .container_book {
                     grid-template-columns: 1fr;
+                    justify-items: center;
                 }
 
                 .container_book section {
