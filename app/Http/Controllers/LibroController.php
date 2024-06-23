@@ -36,7 +36,7 @@ class LibroController extends Controller
         $validated = $request->validate([
             'titulo' => 'required|string|max:255',
             'autor' => 'required|string|max:255',
-            'genero' => 'required|string|max:100',
+            'genero' => 'required|integer',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 

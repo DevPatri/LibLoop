@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('favoritos', function (Blueprint $table) {
-            $table->id();
+        Schema::create('usuarios', function (Blueprint $table) {
+            $table->id('usuario_id')->autoIncrement();
+            $table->string('nombre');
+            $table->string('email')->unique();
+            $table->string('contrasena');
+            $table->string('ubicacion');
+            $table->integer('puntos')->default(0);
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('favoritos');
+        Schema::dropIfExists('usuarios');
     }
 };

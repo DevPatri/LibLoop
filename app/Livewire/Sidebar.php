@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Genero;
 use Livewire\Component;
 use App\Models\Libro;
 use App\Models\Usuario;
@@ -17,7 +18,7 @@ class Sidebar extends Component
     public function mount()
     {
         $this->ubicaciones = Usuario::distinct()->pluck('ubicacion');
-        $this->generos = Libro::distinct()->pluck('genero');
+        $this->generos = Genero::all();
         $this->search = '';
     }
 

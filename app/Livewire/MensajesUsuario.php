@@ -7,7 +7,6 @@ use App\Models\Mensaje;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
-use stdClass;
 
 class MensajesUsuario extends Component
 {
@@ -26,42 +25,29 @@ class MensajesUsuario extends Component
             return $mensaje->remitente_id == Auth::id() ? $mensaje->destinatario_id : $mensaje->remitente_id;
         })->unique();
         $this->usuarios = Usuario::whereIn('usuario_id', $usuarios)->get();
-        // dd($this->usuarios);
-        // $this->usuarios = $this->userFromMessages();
+
         if ($usuarioId) {
             $usuarioNuevo = Usuario::find($usuarioId);
-            //dd($usuarioNuevo->usuario_id);                   //Esto pasa el id correctamente y es solo un objeto, no dos
             foreach ($this->usuarios as $usuario2) {
 
                 if ($usuario2->usuario_id == $usuarioNuevo->usuario_id) {
                     $this->usuarioSeleccionado = $usuarioNuevo;
                     $this->showMessages($this->usuarioSeleccionado->usuario_id);
-                    // dd($this->usuarioSeleccionado);
                     return;
                 }
             }
-            // dd($this->usuarioSeleccionado); // -> null
             $this->usuarioSeleccionado = $usuarioNuevo;
             $this->usuarios->push($this->usuarioSeleccionado);
             $this->showMessages($this->usuarioSeleccionado->usuario_id);
-            // dd($this->usuarioSeleccionado, $usuarioNuevo);
 
-            //si se ha cargado el componente con un usuario, mostrar sus mensajes
         }
     }
-
 
     #[On('recargarMensajes')]
     public function recargarMensajes()
     {
         $this->usuarios = $this->userFromMessages();
     }
-
-    // public function refreshComponent($usuarioSeleccionado){
-    //     dd('hola');
-    //     $this->showMessages($usuarioSeleccionado);
-    //     $this->render();
-    // }
 
     // Muestra todos los usuarios con los que se ha intercambiado mensajes
     public function userFromMessages()
@@ -88,8 +74,6 @@ class MensajesUsuario extends Component
             });
         })->orderBy('fecha_hora')->get();
         $this->mensajes = $mensajes;
-        // dd($this->usuarioSeleccionado);
-        // $this->dispatch('refreshComponent');
     }
 
     // Resetea los mensajes al seleccionar otro usuario
@@ -103,7 +87,6 @@ class MensajesUsuario extends Component
     // Introduce un nuevo mensaje en la base de datos y lo muestra en la vista
     public function updateMessages()
     {
-        // var_dump($this->usuarioSeleccionado);
         $validated = $this->validate([
             'nuevoMensaje' => 'required'
         ]);
@@ -114,8 +97,6 @@ class MensajesUsuario extends Component
         $nuevoMensaje->fecha_hora = now();
         $nuevoMensaje->save();
         $this->showMessages($this->usuarioSeleccionado->usuario_id);
-        // $this->mensajes->push($nuevoMensaje);
-        // var_dump($this->mensajes);
         $this->nuevoMensaje = '';
         $this->dispatch('refreshComponent');
     }

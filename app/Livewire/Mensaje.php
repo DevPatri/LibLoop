@@ -12,9 +12,7 @@ class Mensaje extends Component
 {
     public $contenido;
     public $fecha_hora;
-    public $destinatario_id;
     public $destinatario;
-    public $remitente_id;
     public $remitente;
     protected $listeners = ['component-name:refresh' => 'refresh'];
 

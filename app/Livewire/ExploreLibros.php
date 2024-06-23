@@ -19,7 +19,7 @@ class ExploreLibros extends Component
     public function mount(): void
     {
         $this->libros = Libro::where('estado', 'disponible')->get(); // Obtener los libros disponibles desde la base de datos
-        $this->generos = Genero::all();      // Obtener los géneros desde la base de datos
+        $this->generos = Genero::all()->pluck('nombre');      // Obtener los géneros desde la base de datos
         $this->ubicaciones = Usuario::distinct()->pluck('ubicacion');
         $this->selectedGenero = '';         // Inicializar el género seleccionado
     }

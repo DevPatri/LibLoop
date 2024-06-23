@@ -27,7 +27,7 @@
                 <label for="genero">Género:</label>
                 <select id="genero" name="genero" required>
                     @foreach ($generos as $genero)
-                        <option value="{{ $genero->nombre }}">{{ $genero->nombre }}</option>
+                        <option value="{{ $genero->genero_id }}">{{ $genero->nombre }}</option>
                     @endforeach
                 </select>
             </div>
@@ -67,7 +67,7 @@
 
 
 
-{{-- 
+{{--
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -85,9 +85,9 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
-<body> 
+<body>
 
-<div class="container">  
+<div class="container">
 
     <!-- Navbar personalizado -->
     <div class="navbar">
@@ -96,13 +96,13 @@
             <a href="{{ url('/') }}">Inicio</a>
             <a href="{{ url('/explore') }}">Explora</a>
         </div>
-    </div>  
+    </div>
 
     <!-- Fondo difuminado -->
     <div class="login-background"></div>
 
         <!-- Contenedor centrado -->
-        <div class="centered-container"> 
+        <div class="centered-container">
 
             <div class="py-10 h-screen items-center justify-center contain flex flex-col">
                 <!-- Contenedor del formulario -->
@@ -148,7 +148,7 @@
         </div>
 
             @push('styles')
-                <link rel="stylesheet" href="{{ asset('css/app.css') }}"> 
+                <link rel="stylesheet" href="{{ asset('css/app.css') }}">
                 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
                 <style>
                     .contain {
@@ -167,6 +167,6 @@
 </div>
 
 </body>
-</html> 
+</html>
 
 --}}

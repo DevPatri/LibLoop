@@ -6,7 +6,7 @@
                 <option value="" selected hidden>G&eacute;neros</option>
                 <option value="Todos">Todos</option>
                 @foreach ($generos as $genero)
-                    <option value="{{ $genero }}">{{ $genero }}</option>
+                    <option value="{{ $genero->genero_id }}">{{ $genero->nombre }}</option>
                 @endforeach
             </select>
         </div>

@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Constants\IntercambioStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Intercambio extends Model {
-    
+
     use HasFactory;
 
     protected $table = 'intercambios';
@@ -25,5 +26,14 @@ class Intercambio extends Model {
 
     public function propietario() {
         return $this->belongsTo(Usuario::class, 'propietario_id');
+    }
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->estado)) {
+                $model->estado = IntercambioStatus::SOLICITADO;
+            }
+        });
     }
 }

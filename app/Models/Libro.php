@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Constants\IntercambioStatus;
+use App\Constants\LibroStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Libro extends Model {
-    
+
     use HasFactory;
 
     public $timestamps = false;
@@ -32,7 +34,7 @@ class Libro extends Model {
 
         static::creating(function ($model) {
             if (empty($model->estado)) {
-                $model->estado = 'disponible';
+                $model->estado = LibroStatus::DISPONIBLE;
             }
         });
     }

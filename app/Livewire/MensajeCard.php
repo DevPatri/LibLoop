@@ -16,13 +16,15 @@ class MensajeCard extends Component
         $this->usuario_id = $usuario_id;
     }
 
+    //* selecciona un chat con un usuario
     public function selectChat()
     {
         $this->dispatch('deselectUsuario'); // Emite un evento de deselección para resetear
         $this->dispatch('selectUsuario', $this->usuario_id); //envio de evento cuando se hace click en un usuario
         $this->dispatch('refreshComponent');
     }
-    //borra un chat con todos sus mensajes.
+
+    //* borra un chat con todos sus mensajes.
     public function borrarChat($usuario_id)
     {
         Mensaje::where(function ($query) use ($usuario_id) {
