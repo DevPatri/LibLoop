@@ -35,7 +35,7 @@ class UsuarioController extends Controller {
 
         $usuario->save();
 
-        // Loguear al usuario inmediatamente después del registro  
+        // Loguear al usuario inmediatamente después del registro
         Auth::login($usuario);
 
         return redirect()->route('dashboard')->with('success', 'Usuario registrado y logueado con éxito.');
@@ -60,7 +60,7 @@ class UsuarioController extends Controller {
         ]);
     }
 
-    // Agregar géneros literarios favoritos 
+    // Agregar géneros literarios favoritos
     public function agregarGeneros(Request $request, $userId) {
 
         $usuario = Usuario::find($userId);
@@ -69,13 +69,24 @@ class UsuarioController extends Controller {
         ]);
 
         $usuario->generos()->sync($validated['generos']);  // 'generos' sería el método en el modelo Usuario que define la relación
-    
+
         return back()->with('success', 'Preferencias añadidas correctamente.');
     }
 
+    // Mostrar la vista de favoritos
+    public function favoritos() {
+        $usuario = Auth::user();
+        $favoritos = $usuario->librosFavoritos;
+        return view('favoritos.favoritos', compact('favoritos'));
+    }
+    public function intercambios() {
+        $usuario = Auth::user();
+        $intercambios = $usuario->intercambiosPropios()->orWhere('solicitante_id', $usuario->id)->with('libro')->get();
+        return view('intercambios.intercambios', compact('intercambios'));
+    }
     // // Método para mostrar todos los usuarios (la info de Usuario)
     // public function index() {
-    //     $usuarios = Usuario::all();                          // Obtiene todos los usuarios 
+    //     $usuarios = Usuario::all();                          // Obtiene todos los usuarios
     //     return view('usuarios.index', compact('usuarios')); // Nos devuelve la vista 'usuarios.index' con los usuarios
     // }
 
@@ -87,7 +98,7 @@ class UsuarioController extends Controller {
     // // Método para almacenar un nuevo usuario en la base de datos
     // public function store(Request $request) {
 
-    //     $validated = $request->validate([                  // Valida los datos del formulario 
+    //     $validated = $request->validate([                  // Valida los datos del formulario
     //         'nombre' => 'required',                       // El nombre es obligatorio
     //         'email' => 'required|email|unique:usuarios', // El email es obligatorio, único y debe tener formato de email válido
     //         'contrasena' => 'required|min:6',           // La contraseña es obligatoria y debe tener al menos 6 caracteres
@@ -114,10 +125,10 @@ class UsuarioController extends Controller {
     // // Método para actualizar un usuario existente en la base de datos (mismos requisitos que el método store)
     // public function update(Request $request, Usuario $usuario) {
 
-    //     $validated = $request->validate([ 
-    //         'nombre' => 'required', 
-    //         'email' => 'required|email|unique:usuarios,email,' . $usuario->id, 
-    //         'ubicacion' => 'required' 
+    //     $validated = $request->validate([
+    //         'nombre' => 'required',
+    //         'email' => 'required|email|unique:usuarios,email,' . $usuario->id,
+    //         'ubicacion' => 'required'
     //     ]);
 
     //     $usuario->update($validated);                                                                   // Actualiza el usuario con los datos validados
@@ -126,7 +137,7 @@ class UsuarioController extends Controller {
 
     // // Método para eliminar un usuario de la base de datos
     // public function destroy(Usuario $usuario) {
-    //     $usuario->delete(); 
+    //     $usuario->delete();
     //     return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado con éxito.'); // Redirecciona a la vista 'usuarios.index' con un mensaje de éxito
     // }
 }

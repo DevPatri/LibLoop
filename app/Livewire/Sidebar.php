@@ -2,22 +2,36 @@
 
 namespace App\Livewire;
 
+use App\Models\Genero;
 use Livewire\Component;
 use App\Models\Libro;
+use App\Models\Usuario;
 
 class Sidebar extends Component
 {
+    public $generos;
     public $gender;
+    public $ubicaciones;
+    public $ubicacion;
+    public $search;
 
+    public function mount()
+    {
+        $this->ubicaciones = Usuario::distinct()->pluck('ubicacion');
+        $this->generos = Genero::all();
+        $this->search = '';
+    }
 
     public function render()
     {
-        $generos = Libro::distinct()->pluck('genero');
+
 
         return view(
             'livewire.sidebar',
             [
-                'generos' => $generos,
+                'generos' => $this->generos,
+                'ubicaciones' => $this->ubicaciones,
+                'search' => $this->search
             ]
         );
     }
@@ -29,4 +43,19 @@ class Sidebar extends Component
         $this->dispatch('filter', $this->gender);
     }
     //* end filter
+
+    //* Filtrar con select la ubicación a mostrar.
+    public function filterByUbicacion($ubicacion)
+    {
+        $this->ubicacion = $ubicacion;
+        $this->dispatch('filterByUbicacion', $this->ubicacion);
+    }
+    //* end filter
+
+    //* Buscar por título o autor.
+    public function searchLibros()
+    {
+        $this->dispatch('search', $this->search);
+    }
+    //* end search
 }

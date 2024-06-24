@@ -22,9 +22,7 @@ class Usuario extends Authenticatable {
     protected $primaryKey = 'usuario_id';
     protected $fillable = ['nombre', 'email', 'ubicacion', 'puntos', 'contrasena'];
 
-    // Indicamos a Eloquent que no maneje automáticamente las columnas created_at y updated_at (estaban creadas por defecto)
-    public $timestamps = false;
-
+    public $timestamps = false;   // Indicamos a Eloquent que no maneje automáticamente las columnas created_at y updated_at (estaban creadas por defecto)
 
     protected $hidden = ['contrasena', 'remember_token'];
 
@@ -33,7 +31,6 @@ class Usuario extends Authenticatable {
         return $this->contrasena;
     }
     
-
      // Relación de libros publicados por el usuario
      public function libros() {
         return $this->hasMany(Libro::class, 'usuario_id');

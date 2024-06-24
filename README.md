@@ -1,66 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="" target="_blank"><img src="public/assets/img/logo-libloop.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://github.com/DevPatri/LibLoop"><img src="https://img.shields.io/github/license/DevPatri/LibLoop?style=social&logo=github&logoColor=red
+" alt="License"></a>
 </p>
 
-## About Laravel
+# Libloop
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+LibLoop es una plataforma web diseñada para facilitar el intercambio de libros entre usuarios de forma gratuita. El sistema se basa en un sistema de puntos: al dejar un libro, el usuario suma +3 puntos, y al solicitar un libro, se restan -3 puntos. Este mecanismo permite una mayor flexibilidad en los intercambios, ya que no es necesario un intercambio directo entre dos usuarios.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Los usuarios pueden registrarse, subir información sobre los libros que desean intercambiar, buscar, filtrar por ubicación para asegurar que el intercambio está en su zona, marcar libros como favoritos, gestionar solicitudes de intercambio, y enviar mensajes entre ellos para coordinar puntos de encuentro para el intercambio. La aplicación está diseñada para mejorar la experiencia del usuario en el intercambio de libros usados, ofreciendo una interfaz intuitiva para la gestión de libros y solicitudes.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+LibLoop también se enfoca en promover la lectura al facilitar el acceso a una amplia variedad de libros sin coste alguno. Al ser un sistema gratuito, elimina las barreras económicas que podrían impedir a algunos usuarios acceder a nuevos libros.
 
-## Learning Laravel
+## Instalación
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Instalar PHP.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    Se recomienda instalar algún servidor web tipo XAMPP para obtener el paquete de PHP y MySql. 
+    https://www.apachefriends.org/es/index.html
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Instalar Composer.
+```
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 
-## Laravel Sponsors
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+```
 
-### Premium Partners
+3. Clonar proyecto de GitHub 
+```
+https://github.com/DevPatri/LibLoop.git
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+4. Posicionarse en el directorio del proyecto y ejecutar 
+```
+composer install
+```
 
-## Contributing
+5. Ejecutar instalación de librerias npm.
+```
+npm install
+```
+6. Ejecutar en phpMyAdmin script libloop.sql
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+7. Configurar credenciales de la base de datos en el .env
 
-## Code of Conduct
+8. Levantar servidor web y acceder.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Licencia
 
-## Security Vulnerabilities
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/DevPatri/LibLoop">LibLoop</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/DevPatri/LibLoop">Patricio Egea y Marina Casaus</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<strong>Usted es libre de:</strong>
 
-## License
+<strong>Compartir</strong> — copiar y redistribuir el material en cualquier medio o formato para cualquier propósito, incluso comercialmente.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<strong>Adaptar</strong> — remezclar, transformar y construir a partir del material para cualquier propósito, incluso comercialmente.
+La licenciante no puede revocar estas libertades en tanto usted siga los términos de la licencia.
+
+<strong>Bajo los siguientes términos:</strong>
+<strong>Atribución</strong> — Usted debe dar crédito de manera adecuada , brindar un enlace a la licencia, e indicar si se han realizado cambios . Puede hacerlo en cualquier forma razonable, pero no de forma tal que sugiera que usted o su uso tienen el apoyo de la licenciante.
+No hay restricciones adicionales — No puede aplicar términos legales ni medidas tecnológicas que restrinjan legalmente a otras a hacer cualquier uso permitido por la licencia.

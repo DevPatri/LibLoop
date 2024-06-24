@@ -69,12 +69,23 @@ body {
     color: #333;
 }
 
-.input-group input {
-    width: calc(100% - 20px);
+.input-group input, .input-group select {
+    width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.input-group select {
+    color: #000000;
+    appearance: none; /* Quitar la apariencia por defecto del navegador */
+}
+
+.input-group select:focus {
+    outline: none;
+    border-color: #a58d4f; /* Color del borde al enfocar */
 }
 
 .btn-login {
